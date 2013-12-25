@@ -18,10 +18,11 @@ typedef struct samochod
 } samochod;
 
 samochod *lista=NULL;
-samochod *temp;
+samochod *temp=NULL;
 
 
 samochod* clear(samochod *first);
+samochod* edytuj(samochod *first);
 samochod* pozycja(int poz,samochod* first);
 samochod* push(samochod *first, samochod *newone);
 int rozmiar(samochod* first);
@@ -42,6 +43,19 @@ samochod* clear(samochod *first)
     return NULL;
 }
 
+samochod* edytuj(samochod *temp)
+{
+    printf("Dodawanie nowego samochodu.\n\n"
+           "Marka: ");
+    scanf("%s",temp->marka);
+    printf("\nModel: ");
+    scanf("%s",temp->model);
+    printf("\nCena");
+    scanf("%d",&temp->cena);
+    printf("\nPrzebieg");
+    scanf("%d",&temp->przebieg);
+    return temp;
+}
 
 samochod* pozycja(int poz, samochod* first)
 {
@@ -114,11 +128,12 @@ void wyswietl(samochod *first)
 
     else
     {
-        printf("Nr\tmodyf\tnazwa\n");
+        printf("Marka\tmodel\tcena\tprzebieg\n");
         printf("-------------------------\n");
         do
         {
-
+            printf("%d\t%s\t%s\t%d\t%d\n",first,first->marka,first->model,first->cena,first->przebieg);
+            first=first->nastepny;
         }
         while(first!=NULL);
         printf("-------------------------\n");

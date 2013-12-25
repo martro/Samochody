@@ -1,14 +1,28 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-void funkcja_menu_01();
+void funkcja_menu_11();
+void funkcja_menu_21();
 
 int menu_glowne();
 void podkreslenie(void);
 void zatwierdz(void);
 
-void funkcja_menu_01()
+void funkcja_menu_11()
 {
+    wyswietl(lista);
+}
+
+void funkcja_menu_21()
+{
+    printf("wskaznik stary: %d\n\n",temp);
+    temp=tymczas();
+    printf("wskaznik: %d\n\n",temp);
+    temp=edytuj(temp);
+    printf("wskaznik: %d\n\n",temp);
+    printf("test, marka: %s\n\n",temp->marka);
+    lista=push(lista,temp);
+    printf("wskaznik: %d\n\n",temp);
 }
 
 int menu_glowne()
@@ -35,7 +49,7 @@ int menu_glowne()
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==0))
+            if ((wybor==11)||(wybor==21)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -58,9 +72,14 @@ int menu_glowne()
 
     switch (wybor)
     {
-    case 1:
+    case 11:
     {
-        funkcja_menu_01();
+        funkcja_menu_11();
+        break;
+    }
+    case 21:
+    {
+        funkcja_menu_21();
         break;
     }
 

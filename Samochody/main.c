@@ -6,8 +6,8 @@
     */
 #include <stdio.h>
 #include <stdlib.h>
-#include "menu.h"
 #include "struktura.h"
+#include "menu.h"
 
 int main()
 {
