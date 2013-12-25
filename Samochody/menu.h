@@ -11,8 +11,6 @@ void funkcja_menu_01()
 {
 }
 
-
-
 int menu_glowne()
 {
     int wybor;
@@ -23,14 +21,21 @@ int menu_glowne()
         blad_odczytu=1;
         while((getchar()) != '\n');
         podkreslenie();
-        printf("WYBOR AKCJI PROGRAMU\n"
-               " 1 - WYSWIETL BAZE DANYCH\n"
-               " 6 - ZAKONCZ\n\n"
+        printf("WYBOR AKCJI PROGRAMU\n\n"
+               "BAZA DANYCH:\n"
+               "11 WYSWIETL\n"
+               "12 SORTUJ\n"
+               "13 SZUKAJ\n\n"
+               "21 DODAJ NOWY SAMOCHOD\n"
+               "21 EDYTUJ DANE SAMOCHODU\n"
+               "23 USUN SAMOCHOD\n\n"
+               "31 STATYSTYKI\n"
+               " 0 - ZAKONCZ\n\n"
 
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==1)||(wybor==6))
+            if ((wybor==11)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -59,7 +64,7 @@ int menu_glowne()
         break;
     }
 
-    case 6:
+    case 0:
     {
         return 0;
         break;

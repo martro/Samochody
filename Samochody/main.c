@@ -7,12 +7,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "menu.h"
+#include "struktura.h"
 
 int main()
 {
     int dzialaj;
     printf("Laboratorium Programowanie w C\n"
-           "Baza danych\n"
+           "Baza danych komisu samochodowego\n"
            "Prowadzacy: mgr inz. Mariusz Ostrowski\n"
            "Marcin Trojan 205608 MTR W-10\n");
 

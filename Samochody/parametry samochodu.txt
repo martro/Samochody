@@ -1,0 +1,1 @@
+marka, model, rok produkcji, spalanie, cena, przebieg, nowy/u¿ywany, wypadek/bezwypadkowy, benzyna/diesel/gaz96
