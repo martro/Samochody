@@ -17,14 +17,18 @@ int main()
            "Prowadzacy: mgr inz. Mariusz Ostrowski\n"
            "Marcin Trojan 205608 MTR W-10\n");
 
+    char *nazwapliku;
+    nazwapliku=(char*)malloc(sizeof(char)*NAZWA_PLIKU);
+
     do
     {
 
-        dzialaj=menu_glowne();
+        dzialaj=menu_glowne(nazwapliku);
         zatwierdz();
     }
     while (dzialaj);
 
     getchar();
     return 0;
+    free(nazwapliku);
 }

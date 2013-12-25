@@ -3,6 +3,7 @@
 
 #define MODEL 30
 #define MARKA 30
+#define NAZWA_PLIKU 30
 
 typedef struct samochod
 {
@@ -28,6 +29,7 @@ samochod* push(samochod *first, samochod *newone);
 int rozmiar(samochod* first);
 samochod* tymczas();
 void wyswietl(samochod *first);
+void zapisz_bufor(samochod* temp,char* nazwapliku);
 
 
 samochod* clear(samochod *first)
@@ -132,11 +134,48 @@ void wyswietl(samochod *first)
         printf("-------------------------\n");
         do
         {
-            printf("%d\t%s\t%s\t%d\t%d\n",first,first->marka,first->model,first->cena,first->przebieg);
+            printf("%s\t%s\t%d\t%d\n",first->marka,first->model,first->cena,first->przebieg);
             first=first->nastepny;
         }
         while(first!=NULL);
         printf("-------------------------\n");
+    }
+}
+
+void zapisz_bufor(samochod* temp,char* nazwapliku)
+{
+    char wybor;
+    FILE * pFile;
+
+    if (1)
+    {
+        printf("\nZapis pliku %s",nazwapliku);
+        printf("\nWybierz akcje:"
+               "\n1 - domyslna nazwa"
+               "\n2 - bierzaca nazwa"
+               "\n3 - nowa nazwa\n");
+        while((getchar()) != '\n');
+        wybor=getchar();
+        printf("\nwybor: %d\n",wybor);
+
+        if (wybor=='1')
+            nazwapliku="data.dat";
+        if (wybor=='3')
+        {
+            printf("\nPODAJ NAZWE PLIKU (rozszerzenie: .dat): ");
+            scanf("%s",nazwapliku);
+        }
+
+        printf("\nZapisywanie pod nazwa: %s",nazwapliku);
+        pFile = fopen (nazwapliku,"w");
+
+        if (pFile!=NULL)
+        {
+            fprintf(pFile,"P\n");
+
+            fclose (pFile);
+            printf("\nZAPISANO\n");
+        }
     }
 }
 

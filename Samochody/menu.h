@@ -3,6 +3,7 @@
 
 void funkcja_menu_11();
 void funkcja_menu_21();
+void funkcja_menu_31();
 
 int menu_glowne();
 void podkreslenie(void);
@@ -15,17 +16,17 @@ void funkcja_menu_11()
 
 void funkcja_menu_21()
 {
-    printf("wskaznik stary: %d\n\n",temp);
     temp=tymczas();
-    printf("wskaznik: %d\n\n",temp);
     temp=edytuj(temp);
-    printf("wskaznik: %d\n\n",temp);
-    printf("test, marka: %s\n\n",temp->marka);
     lista=push(lista,temp);
-    printf("wskaznik: %d\n\n",temp);
 }
 
-int menu_glowne()
+void funkcja_menu_31(char* nazwapliku)
+{
+    zapisz_bufor(temp,nazwapliku);
+}
+
+int menu_glowne(char* nazwapliku)
 {
     int wybor;
     char blad_odczytu;
@@ -43,13 +44,15 @@ int menu_glowne()
                "21 DODAJ NOWY SAMOCHOD\n"
                "21 EDYTUJ DANE SAMOCHODU\n"
                "23 USUN SAMOCHOD\n\n"
-               "31 STATYSTYKI\n"
+               "31 ZAPISZ BUFOR\n"
+               "32 WCZYTAJ BUFOR\n\n"
+               "41 STATYSTYKI\n\n"
                " 0 - ZAKONCZ\n\n"
 
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==21)||(wybor==0))
+            if ((wybor==11)||(wybor==21)||(wybor==31)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -80,6 +83,11 @@ int menu_glowne()
     case 21:
     {
         funkcja_menu_21();
+        break;
+    }
+    case 31:
+    {
+        funkcja_menu_31(nazwapliku);
         break;
     }
 
