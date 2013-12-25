@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1387966379 source:c:\users\martro\documents\github\samochody\samochody\main.c
+	<stdio.h>
+	<stdlib.h>
+	"menu.h"
+
+1387966647 c:\users\martro\documents\github\samochody\samochody\menu.h
+
