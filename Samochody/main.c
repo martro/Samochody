@@ -28,8 +28,23 @@ int main()
     }
     while (dzialaj);
 
-    getchar();
-    return 0;
+    if (lista)
+    {
+        printf("W buforze znajduja sie dane.\nZapisac przed wylaczeniem programu?");
+        printf("Aby wyjsc bez zapisywania nacisnij 'n'.\nWybor: ");
+        getchar();
+        if (getchar()!='n')
+        {
+            zapisz_bufor(lista,dane);
+        }
+
+    }
+
+
+    lista=clear(lista);
+
     free(dane->nazwapliku);
     free(dane);
+    printf("\nPROGRAM ZAKONCZYL DZIALANIE POPRAWNIE\n\n");
+    return 0;
 }

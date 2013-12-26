@@ -46,8 +46,10 @@ void zapisz_bufor(samochod* temp,d_prog* dane);
 samochod* clear(samochod *first)
 {
     if (first==NULL)
+    {
+        printf("W buforze nie ma dancyh.");
         return NULL;
-
+    }
     clear (first->nastepny);
 
     free(first->marka);
@@ -305,10 +307,8 @@ samochod* wczytaj_bufor(d_prog* dane)
     char wybor;
     char znak;
     FILE * pFile;
-    samochod* temp;
-    samochod* lista=NULL;
 
-    if (1)
+    if (lista==NULL)
     {
         printf("\nWczytywanie pliku %s",dane->nazwapliku);
         printf("\nWybierz akcje:"
@@ -338,7 +338,6 @@ samochod* wczytaj_bufor(d_prog* dane)
             do
             {
                 znak=fgetc(pFile);
-                // fseek(pFile,-1,SEEK_CUR);
 
                 if (znak=='+')
                 {
@@ -346,18 +345,18 @@ samochod* wczytaj_bufor(d_prog* dane)
                     temp=tymczas();
                     fscanf(pFile,"%s %s %d %d",temp->marka,temp->model,&temp->cena,&temp->przebieg);
                     fscanf(pFile,"%d %f %d %d %d",&temp->rok,&temp->spalanie,&temp->nowyuzywany,&temp->wypadek,&temp->paliwo);
-                    //  fseek(pFile,-1,SEEK_CUR);
                     lista=push(lista,temp);
                 }
-                // else
-                //   while (fgetc(pFile)!='\n');
-                printf("%d\n",znak);
             }
             while(znak!=EOF);
 
             fclose (pFile);
             printf("\nZAPISANO\n");
         }
+    }
+    else
+    {
+        printf("W buforze znajduja sie juz dane.\nPrzed wgraniem nowych nalezy usunac badz zapisac poprzednie.\n");
     }
     return lista;
 }
@@ -400,7 +399,7 @@ void zapisz_bufor(samochod* first,d_prog* dane)
                    "\n1 - domyslna nazwa"
                    "\n2 - bierzaca nazwa"
                    "\n3 - nowa nazwa\n");
-            getchar();
+
             wybor=getchar();
             printf("\nwybor: %c\n",wybor);
 

@@ -5,6 +5,7 @@ void funkcja_menu_11();
 void funkcja_menu_21();
 void funkcja_menu_31();
 void funkcja_menu_32();
+void funkcja_menu_33();
 
 int menu_glowne();
 void zatwierdz(void);
@@ -24,11 +25,21 @@ void funkcja_menu_21()
 void funkcja_menu_31()
 {
     zapisz_bufor(lista,dane);
+    printf("\nZapisano pomyslnie.\n\nCzy usunac dane z bufora?\n");
+    printf("Aby usunac nacisnij 't'.\nWybor: ");
+    getchar();
+    if (getchar()=='t')
+        lista=clear(lista);
+
 }
 
 void funkcja_menu_32()
 {
     lista=wczytaj_bufor(dane);
+}
+void funkcja_menu_33()
+{
+    lista=clear(lista);
 }
 
 int menu_glowne()
@@ -50,14 +61,15 @@ int menu_glowne()
                "21 EDYTUJ DANE SAMOCHODU\n"
                "23 USUN SAMOCHOD\n\n"
                "31 ZAPISZ BUFOR\n"
-               "32 WCZYTAJ BUFOR\n\n"
+               "32 WCZYTAJ BUFOR\n"
+               "33 USUN BUFOR BEZ ZAPISYWANIA\n\n"
                "41 STATYSTYKI\n\n"
                " 0 - ZAKONCZ\n\n"
 
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==21)||(wybor==31)||(wybor==32)||(wybor==0))
+            if ((wybor==11)||(wybor==21)||(wybor==31)||(wybor==32)||(wybor==33)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -98,6 +110,11 @@ int menu_glowne()
     case 32:
     {
         funkcja_menu_32();
+        break;
+    }
+    case 33:
+    {
+        funkcja_menu_33();
         break;
     }
 
