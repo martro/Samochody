@@ -4,9 +4,9 @@
 void funkcja_menu_11();
 void funkcja_menu_21();
 void funkcja_menu_31();
+void funkcja_menu_32();
 
 int menu_glowne();
-void podkreslenie(void);
 void zatwierdz(void);
 
 void funkcja_menu_11()
@@ -21,12 +21,17 @@ void funkcja_menu_21()
     lista=push(lista,temp);
 }
 
-void funkcja_menu_31(char* nazwapliku)
+void funkcja_menu_31()
 {
-    zapisz_bufor(temp,nazwapliku);
+    zapisz_bufor(lista,dane);
 }
 
-int menu_glowne(char* nazwapliku)
+void funkcja_menu_32()
+{
+    lista=wczytaj_bufor(dane);
+}
+
+int menu_glowne()
 {
     int wybor;
     char blad_odczytu;
@@ -52,7 +57,7 @@ int menu_glowne(char* nazwapliku)
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==21)||(wybor==31)||(wybor==0))
+            if ((wybor==11)||(wybor==21)||(wybor==31)||(wybor==32)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -87,7 +92,12 @@ int menu_glowne(char* nazwapliku)
     }
     case 31:
     {
-        funkcja_menu_31(nazwapliku);
+        funkcja_menu_31();
+        break;
+    }
+    case 32:
+    {
+        funkcja_menu_32();
         break;
     }
 
@@ -104,11 +114,6 @@ int menu_glowne(char* nazwapliku)
     }
 
     return wybor;
-}
-
-void podkreslenie(void)
-{
-    printf("\n-------------------\n");
 }
 
 void zatwierdz(void)

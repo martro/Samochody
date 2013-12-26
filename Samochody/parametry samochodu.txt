@@ -1,1 +1,1 @@
-marka, model, rok produkcji, spalanie, cena, przebieg, nowy/u¿ywany, wypadek/bezwypadkowy, benzyna/diesel/gaz96
+marka, model, cena, przebieg, rok produkcji, spalanie, nowy(1)/u¿ywany(2), wypadek(1)/bezwypadkowy(0), benzyna(1)/diesel(2)/gaz(3)

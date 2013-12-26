@@ -35,6 +35,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
+		<Unit filename="struktura.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

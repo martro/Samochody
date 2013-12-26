@@ -12,24 +12,35 @@ typedef struct samochod
     struct samochod *nastepny;
     struct samochod *poprzedni;
 
-    int rok,spalanie,cena,przebieg;
+    int rok,cena,przebieg;
     int nowyuzywany; //1-nowy;, 2-uzywany
     int paliwo; // 1-benzyna, 2-diesel, 3-gaz
-    int wypadek; //0- bezwypadkowy, 1-powypadkowy
+    int wypadek; //1- bezwypadkowy, 2-powypadkowy
+    float spalanie;
 } samochod;
+
+typedef struct d_prog
+{
+    char* nazwapliku;
+    int czynazwa;
+} d_prog;
 
 samochod *lista=NULL;
 samochod *temp=NULL;
+d_prog* dane;
 
 
 samochod* clear(samochod *first);
 samochod* edytuj(samochod *first);
+d_prog* init();
+void podkreslenie(void);
 samochod* pozycja(int poz,samochod* first);
 samochod* push(samochod *first, samochod *newone);
 int rozmiar(samochod* first);
 samochod* tymczas();
+samochod* wczytaj_bufor();
 void wyswietl(samochod *first);
-void zapisz_bufor(samochod* temp,char* nazwapliku);
+void zapisz_bufor(samochod* temp,d_prog* dane);
 
 
 samochod* clear(samochod *first)
@@ -47,16 +58,184 @@ samochod* clear(samochod *first)
 
 samochod* edytuj(samochod *temp)
 {
+    int error;
     printf("Dodawanie nowego samochodu.\n\n"
            "Marka: ");
     scanf("%s",temp->marka);
     printf("\nModel: ");
     scanf("%s",temp->model);
-    printf("\nCena");
-    scanf("%d",&temp->cena);
-    printf("\nPrzebieg");
-    scanf("%d",&temp->przebieg);
+    do
+    {
+        podkreslenie();
+        printf("\nCena: ");
+        error=0;
+        if (scanf("%d",&temp->cena)==0)
+        {
+            error=1;
+            printf("Wprowadzona cena jest nieprawidlowa.\n");
+            getchar();
+        }
+        else if (temp->cena<0)
+        {
+            printf("Cena nie moze byc ujemna.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+
+    do
+    {
+        podkreslenie();
+        printf("\nPrzebieg: ");
+        error=0;
+        if (scanf("%d",&temp->przebieg)==0)
+        {
+            error=1;
+            printf("Wprowadzony przebieg jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (temp->przebieg<0)
+        {
+            printf("Przebieg nie moze byc ujemny.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("\nRok produkcji: ");
+        error=0;
+        if (scanf("%d",&temp->rok)==0)
+        {
+            error=1;
+            printf("Wprowadzony rok produkcji jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if ((temp->rok)<1950)
+        {
+            printf("Rok produkcji nie moze byc mniejszy niz 1950.\n");
+            error=1;
+            getchar();
+        }
+        else if ((temp->rok)>2014)
+        {
+            printf("Rok produkcji nie moze byc wiekszy niz 2014.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("\nSpalanie");
+        error=0;
+        if (scanf("%f",&temp->spalanie)==0)
+        {
+            error=1;
+            printf("Wprowadzone spalanie jest nieprawidlowe.\n");
+            getchar();
+        }
+        else if ((temp->spalanie)<=0)
+        {
+            printf("Spalanie nie moze byc ujemne.\n");
+            error=1;
+            getchar();
+        }
+        else if ((temp->spalanie)>25)
+        {
+            printf("Spalanie nie moze byc wieksze niz 25.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("Samochod nowy czy uzywany?\n");
+        printf("\n1 - Nowy\n2-Uzywany\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&temp->nowyuzywany)==0)
+        {
+            error=1;
+            printf("Wprowadzony parametr jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (((temp->nowyuzywany)!=1)&&((temp->nowyuzywany)!=2))
+        {
+            printf("Nieprawidlowy wybor.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("Samochod bezwypadkowy czy powypadkowy?\n");
+        printf("\n1 - Bezwypadkowy\n2-Powypadkowy\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&temp->wypadek)==0)
+        {
+            error=1;
+            printf("Wprowadzony parametr jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (((temp->wypadek)!=1)&&((temp->wypadek)!=2))
+        {
+            printf("Nieprawidlowy wybor.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("Rodzaj paliwa\n");
+        printf("\n1 - Benzyna\n2-Diesel\n3-Gaz\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&temp->paliwo)==0)
+        {
+            error=1;
+            printf("Wprowadzony rodzaj paliwa jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (((temp->paliwo)!=1)&&((temp->paliwo)!=2)&&((temp->paliwo)!=3))
+        {
+            printf("Nieprawidlowy wybor paliwa.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
     return temp;
+}
+
+d_prog* init()
+{
+    dane=(d_prog *)malloc(sizeof(d_prog));
+    dane->nazwapliku=(char*)malloc(sizeof(char)*NAZWA_PLIKU);
+    dane->czynazwa=0;
+    return dane;
+}
+
+void podkreslenie(void)
+{
+    printf("\n-------------------\n");
 }
 
 samochod* pozycja(int poz, samochod* first)
@@ -121,6 +300,68 @@ samochod* tymczas()
     return temp;
 }
 
+samochod* wczytaj_bufor(d_prog* dane)
+{
+    char wybor;
+    char znak;
+    FILE * pFile;
+    samochod* temp;
+    samochod* lista=NULL;
+
+    if (1)
+    {
+        printf("\nWczytywanie pliku %s",dane->nazwapliku);
+        printf("\nWybierz akcje:"
+               "\n1 - domyslna lokalizacja\n"
+               "\n2 - wybranaa nazwa\n");
+        while((getchar()) != '\n');
+        wybor=getchar();
+        printf("\nwybor: %d\n",wybor);
+
+        if (wybor=='1')
+            dane->nazwapliku="data.dat";
+        if (wybor=='2')
+        {
+            getchar();
+            printf("\nPODAJ NAZWE PLIKU (rozszerzenie: .dat): ");
+            scanf("%s",dane->nazwapliku);
+            printf("\nNAZWa PLIKU: %s",dane->nazwapliku);
+            getchar();
+            getchar();
+        }
+
+        printf("\nWczytywanie pliku: %s",dane->nazwapliku);
+        pFile = fopen (dane->nazwapliku,"r");
+
+        if (pFile!=NULL)
+        {
+            do
+            {
+                znak=fgetc(pFile);
+                // fseek(pFile,-1,SEEK_CUR);
+
+                if (znak=='+')
+                {
+                    // fseek(pFile,1,SEEK_CUR);
+                    temp=tymczas();
+                    fscanf(pFile,"%s %s %d %d",temp->marka,temp->model,&temp->cena,&temp->przebieg);
+                    fscanf(pFile,"%d %f %d %d %d",&temp->rok,&temp->spalanie,&temp->nowyuzywany,&temp->wypadek,&temp->paliwo);
+                    //  fseek(pFile,-1,SEEK_CUR);
+                    lista=push(lista,temp);
+                }
+                // else
+                //   while (fgetc(pFile)!='\n');
+                printf("%d\n",znak);
+            }
+            while(znak!=EOF);
+
+            fclose (pFile);
+            printf("\nZAPISANO\n");
+        }
+    }
+    return lista;
+}
+
 void wyswietl(samochod *first)
 {
     if (first==NULL)
@@ -135,6 +376,7 @@ void wyswietl(samochod *first)
         do
         {
             printf("%s\t%s\t%d\t%d\n",first->marka,first->model,first->cena,first->przebieg);
+            printf("%d\t%f\t%d\t%d\t%d\n",first->rok,first->spalanie,first->nowyuzywany,first->wypadek,first->paliwo);
             first=first->nastepny;
         }
         while(first!=NULL);
@@ -142,41 +384,70 @@ void wyswietl(samochod *first)
     }
 }
 
-void zapisz_bufor(samochod* temp,char* nazwapliku)
+void zapisz_bufor(samochod* first,d_prog* dane)
 {
+    int i,roz,error;
     char wybor;
     FILE * pFile;
 
-    if (1)
+    if (lista!=NULL)
     {
-        printf("\nZapis pliku %s",nazwapliku);
-        printf("\nWybierz akcje:"
-               "\n1 - domyslna nazwa"
-               "\n2 - bierzaca nazwa"
-               "\n3 - nowa nazwa\n");
-        while((getchar()) != '\n');
-        wybor=getchar();
-        printf("\nwybor: %d\n",wybor);
-
-        if (wybor=='1')
-            nazwapliku="data.dat";
-        if (wybor=='3')
+        printf("\nZapis pliku %s",dane->nazwapliku);
+        do
         {
-            printf("\nPODAJ NAZWE PLIKU (rozszerzenie: .dat): ");
-            scanf("%s",nazwapliku);
-        }
+            error=1;
+            printf("\nWybierz akcje:"
+                   "\n1 - domyslna nazwa"
+                   "\n2 - bierzaca nazwa"
+                   "\n3 - nowa nazwa\n");
+            getchar();
+            wybor=getchar();
+            printf("\nwybor: %c\n",wybor);
 
-        printf("\nZapisywanie pod nazwa: %s",nazwapliku);
-        pFile = fopen (nazwapliku,"w");
+            if (wybor=='1')
+            {
+                dane->nazwapliku="data.dat";
+                error=0;
+            }
+            else if (wybor=='2')
+            {
+                if (dane->czynazwa==1)
+                    error=0;
+                else
+                    printf("Nie ma bierzacej nazwy w buforze.\n");
+            }
+            else if (wybor=='3')
+            {
+                printf("\nPODAJ NAZWE PLIKU (rozszerzenie: .dat): ");
+                scanf("%s",dane->nazwapliku);
+                printf("\nwybor %s",dane->nazwapliku);
+                error=0;
+            }
+
+            if (error==1)
+                printf("Niepoprawny wybor. Wybierz jeszcze raz.\n");
+        }
+        while (error==1);
+
+        printf("\nZapisywanie pod nazwa: %s",dane->nazwapliku);
+        pFile = fopen (dane->nazwapliku,"w");
 
         if (pFile!=NULL)
         {
-            fprintf(pFile,"P\n");
+            roz=rozmiar(first);
+            for(i=0; i<roz; i++)
+            {
+                fprintf(pFile,"+%s %s %d %d ",first->marka,first->model,first->cena,first->przebieg);
+                fprintf(pFile,"%d %f %d %d %d\n",first->rok,first->spalanie,first->nowyuzywany,first->wypadek,first->paliwo);
+                first=first->nastepny;
+            }
 
-            fclose (pFile);
-            printf("\nZAPISANO\n");
+            if (fclose (pFile))
+                printf("\nZAPISANO\n");
         }
     }
+    else
+        printf("Nie ma danych w buforze.");
 }
 
 #endif // STRUKTURA_H_INCLUDED
