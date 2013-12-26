@@ -363,6 +363,7 @@ samochod* wczytaj_bufor(d_prog* dane)
 
 void wyswietl(samochod *first)
 {
+    int i=0;
     if (first==NULL)
     {
         printf("\nLista jest pusta.");
@@ -370,12 +371,13 @@ void wyswietl(samochod *first)
 
     else
     {
-        printf("Marka\tmodel\tcena\tprzebieg\n");
+        printf("L.p.\tMarka\t\tmodel\t\tcena\t\tprzebieg\n");
         printf("-------------------------\n");
         do
         {
-            printf("%s\t%s\t%d\t%d\n",first->marka,first->model,first->cena,first->przebieg);
-            printf("%d\t%f\t%d\t%d\t%d\n",first->rok,first->spalanie,first->nowyuzywany,first->wypadek,first->paliwo);
+            i++;
+            printf("%d\t%s\t\t\t%s\t\t%d\t\t%d\n",i,first->marka,first->model,first->cena,first->przebieg);
+           // printf("%d\t%f\t%d\t%d\t%d\n",first->rok,first->spalanie,first->nowyuzywany,first->wypadek,first->paliwo);
             first=first->nastepny;
         }
         while(first!=NULL);

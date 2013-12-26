@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1388094621 source:c:\users\martro\documents\github\samochody\samochody\main.c
+1388094705 source:c:\users\martro\documents\github\samochody\samochody\main.c
 	<stdio.h>
 	<stdlib.h>
 	"struktura.h"
@@ -7,5 +7,5 @@
 
 1388093658 c:\users\martro\documents\github\samochody\samochody\menu.h
 
-1388094537 c:\users\martro\documents\github\samochody\samochody\struktura.h
+1388099066 c:\users\martro\documents\github\samochody\samochody\struktura.h
 
