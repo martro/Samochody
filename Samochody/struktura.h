@@ -25,9 +25,6 @@ typedef struct d_prog
     int czynazwa;
 } d_prog;
 
-samochod *lista=NULL;
-samochod *temp=NULL;
-d_prog* dane;
 
 
 samochod* clear(samochod *first);
@@ -227,7 +224,7 @@ samochod* edytuj(samochod *temp)
     return temp;
 }
 
-d_prog* init()
+d_prog* init(d_prog* dane)
 {
     dane=(d_prog *)malloc(sizeof(d_prog));
     dane->nazwapliku=(char*)malloc(sizeof(char)*NAZWA_PLIKU);
@@ -293,7 +290,7 @@ int rozmiar(samochod* first)
     return i;
 }
 
-samochod* tymczas()
+samochod* tymczas(samochod* temp)
 {
     temp=(samochod *)malloc(sizeof(samochod));
     temp->model=(char*)malloc(sizeof(char)*MODEL);
@@ -302,7 +299,7 @@ samochod* tymczas()
     return temp;
 }
 
-samochod* wczytaj_bufor(d_prog* dane)
+samochod* wczytaj_bufor(d_prog* dane, samochod* lista,samochod* temp)
 {
     char wybor;
     char znak;
@@ -342,7 +339,7 @@ samochod* wczytaj_bufor(d_prog* dane)
                 if (znak=='+')
                 {
                     // fseek(pFile,1,SEEK_CUR);
-                    temp=tymczas();
+                    temp=tymczas(temp);
                     fscanf(pFile,"%s %s %d %d",temp->marka,temp->model,&temp->cena,&temp->przebieg);
                     fscanf(pFile,"%d %f %d %d %d",&temp->rok,&temp->spalanie,&temp->nowyuzywany,&temp->wypadek,&temp->paliwo);
                     lista=push(lista,temp);
@@ -391,9 +388,6 @@ void wyswietl(samochod *first)
             ilosc=printf("%d",first->przebieg);
                 for(j=0;j<(10-ilosc);j++)
                     printf(" ");
-
-             // printf("%d\t\t%d\n",first->cena,first->przebieg);
-           // printf("%d\t%f\t%d\t%d\t%d\n",first->rok,first->spalanie,first->nowyuzywany,first->wypadek,first->paliwo);
             first=first->nastepny;
         }
         while(first!=NULL);
@@ -407,7 +401,7 @@ void zapisz_bufor(samochod* first,d_prog* dane)
     char wybor;
     FILE * pFile;
 
-    if (lista!=NULL)
+    if (first!=NULL)
     {
         printf("\nZapis pliku %s",dane->nazwapliku);
         do

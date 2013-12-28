@@ -6,6 +6,7 @@
     */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "struktura.h"
 #include "menu.h"
 
@@ -13,18 +14,24 @@ int main()
 {
     int dzialaj;
     char znak;
+
+samochod *lista=NULL;
+samochod *temp=NULL;
+d_prog* dane=NULL;
+
     printf("Laboratorium Programowanie w C\n"
            "Baza danych komisu samochodowego\n"
            "Prowadzacy: mgr inz. Mariusz Ostrowski\n"
            "Marcin Trojan 205608 MTR W-10\n");
 
-    dane=init();
 
+
+    dane=init(dane);
 
     do
     {
-
-        dzialaj=menu_glowne();
+        dzialaj=menu_glowne(lista,temp,dane);
+        printf("nazwa: %s",lista->marka);
         zatwierdz();
     }
     while (dzialaj);

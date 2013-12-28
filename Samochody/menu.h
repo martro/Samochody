@@ -11,23 +11,25 @@ void funkcja_menu_33();
 int menu_glowne();
 void zatwierdz(void);
 
-void funkcja_menu_11()
+void funkcja_menu_11(samochod* lista)
 {
     wyswietl(lista);
 }
 
-void funkcja_menu_21()
+void funkcja_menu_21(samochod* temp, samochod* lista)
 {
-    temp=tymczas();
+    temp=tymczas(temp);
     temp=edytuj(temp);
+    printf("\ntest: %s\n",temp->marka);
     lista=push(lista,temp);
+    printf("\ntest: %s\n",lista->marka);
 }
 void funkcja_menu_23()
 {
 //funkcja usun
 }
 
-void funkcja_menu_31()
+void funkcja_menu_31(samochod* lista,d_prog* dane)
 {
     zapisz_bufor(lista,dane);
     printf("\nZapisano pomyslnie.\n\nCzy usunac dane z bufora?\n");
@@ -38,19 +40,20 @@ void funkcja_menu_31()
 
 }
 
-void funkcja_menu_32()
+void funkcja_menu_32(samochod* lista,d_prog* dane, samochod* temp)
 {
-    lista=wczytaj_bufor(dane);
+    lista=wczytaj_bufor(dane, lista, temp);
 }
-void funkcja_menu_33()
+void funkcja_menu_33(samochod* lista)
 {
     lista=clear(lista);
 }
 
-int menu_glowne()
+int menu_glowne(samochod* lista,samochod* temp,d_prog* dane)
 {
     int wybor;
     char blad_odczytu;
+
 
     do
     {
@@ -99,12 +102,12 @@ int menu_glowne()
     {
     case 11:
     {
-        funkcja_menu_11();
+        funkcja_menu_11(lista);
         break;
     }
     case 21:
     {
-        funkcja_menu_21();
+        funkcja_menu_21(temp,lista);
         break;
     }
     case 23:
@@ -114,17 +117,17 @@ int menu_glowne()
     }
     case 31:
     {
-        funkcja_menu_31();
+        funkcja_menu_31(lista,dane);
         break;
     }
     case 32:
     {
-        funkcja_menu_32();
+        funkcja_menu_32(lista,dane,temp);
         break;
     }
     case 33:
     {
-        funkcja_menu_33();
+        funkcja_menu_33(lista);
         break;
     }
 
