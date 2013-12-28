@@ -1,8 +1,8 @@
 #ifndef STRUKTURA_H_INCLUDED
 #define STRUKTURA_H_INCLUDED
 
-#define MODEL 30
-#define MARKA 30
+#define MODEL 12
+#define MARKA 12
 #define NAZWA_PLIKU 30
 
 typedef struct samochod
@@ -25,9 +25,6 @@ typedef struct d_prog
     int czynazwa;
 } d_prog;
 
-samochod *lista=NULL;
-samochod *temp=NULL;
-d_prog* dane;
 
 
 samochod* clear(samochod *first);
@@ -61,7 +58,7 @@ samochod* clear(samochod *first)
 samochod* edytuj(samochod *temp)
 {
     int error;
-    printf("Dodawanie nowego samochodu.\n\n"
+    printf("Podaj dane samochodu.\n\n"
            "Marka: ");
     scanf("%s",temp->marka);
     printf("\nModel: ");
@@ -227,7 +224,7 @@ samochod* edytuj(samochod *temp)
     return temp;
 }
 
-d_prog* init()
+d_prog* init(d_prog* dane)
 {
     dane=(d_prog *)malloc(sizeof(d_prog));
     dane->nazwapliku=(char*)malloc(sizeof(char)*NAZWA_PLIKU);
@@ -293,7 +290,7 @@ int rozmiar(samochod* first)
     return i;
 }
 
-samochod* tymczas()
+samochod* tymczas(samochod* temp)
 {
     temp=(samochod *)malloc(sizeof(samochod));
     temp->model=(char*)malloc(sizeof(char)*MODEL);
@@ -302,7 +299,7 @@ samochod* tymczas()
     return temp;
 }
 
-samochod* wczytaj_bufor(d_prog* dane)
+samochod* wczytaj_bufor(d_prog* dane, samochod* lista,samochod* temp)
 {
     char wybor;
     char znak;
@@ -342,7 +339,7 @@ samochod* wczytaj_bufor(d_prog* dane)
                 if (znak=='+')
                 {
                     // fseek(pFile,1,SEEK_CUR);
-                    temp=tymczas();
+                    temp=tymczas(temp);
                     fscanf(pFile,"%s %s %d %d",temp->marka,temp->model,&temp->cena,&temp->przebieg);
                     fscanf(pFile,"%d %f %d %d %d",&temp->rok,&temp->spalanie,&temp->nowyuzywany,&temp->wypadek,&temp->paliwo);
                     lista=push(lista,temp);
@@ -363,7 +360,7 @@ samochod* wczytaj_bufor(d_prog* dane)
 
 void wyswietl(samochod *first)
 {
-    int i=0;
+    int i=0,ilosc,j;
     if (first==NULL)
     {
         printf("\nLista jest pusta.");
@@ -371,17 +368,30 @@ void wyswietl(samochod *first)
 
     else
     {
-        printf("L.p.\tMarka\t\tmodel\t\tcena\t\tprzebieg\n");
-        printf("-------------------------\n");
+        printf("BAZA DANYCH KOMISU SMAOCHODOWEGO\n\n");
+        printf("Nr   Marka          Model          cena      przebieg\n");
+        printf("---------------------------------------------------------");
         do
         {
             i++;
-            printf("%d\t%s\t\t\t%s\t\t%d\t\t%d\n",i,first->marka,first->model,first->cena,first->przebieg);
-           // printf("%d\t%f\t%d\t%d\t%d\n",first->rok,first->spalanie,first->nowyuzywany,first->wypadek,first->paliwo);
+            ilosc=0;
+            printf("\n%3d  ",i);
+            ilosc=printf("%s",first->marka);
+                for(j=0;j<(15-ilosc);j++)
+                    printf(" ");
+            ilosc=printf("%s",first->model);
+                for(j=0;j<(15-ilosc);j++)
+                    printf(" ");
+            ilosc=printf("%d",first->cena);
+                for(j=0;j<(10-ilosc);j++)
+                    printf(" ");
+            ilosc=printf("%d",first->przebieg);
+                for(j=0;j<(10-ilosc);j++)
+                    printf(" ");
             first=first->nastepny;
         }
         while(first!=NULL);
-        printf("-------------------------\n");
+        printf("\n---------------------------------------------------------\n");
     }
 }
 
@@ -391,7 +401,7 @@ void zapisz_bufor(samochod* first,d_prog* dane)
     char wybor;
     FILE * pFile;
 
-    if (lista!=NULL)
+    if (first!=NULL)
     {
         printf("\nZapis pliku %s",dane->nazwapliku);
         do
