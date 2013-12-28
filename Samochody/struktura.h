@@ -37,6 +37,7 @@ samochod* push(samochod *first, samochod *newone);
 int rozmiar(samochod* first);
 void test(samochod *temp);
 samochod* tymczas();
+samochod* usun_1(samochod *lista,samochod* temp);
 samochod* wczytaj_bufor();
 void wyswietl(samochod *first);
 void zapisz_bufor(samochod* temp,d_prog* dane);
@@ -275,9 +276,11 @@ samochod* push(samochod *first, samochod *newone)
 
     while (temp->nastepny!=NULL)
     {
+        temp->nastepny->poprzedni=temp;
         temp=temp->nastepny;
     }
     temp->nastepny=newone;
+    temp->nastepny->poprzedni=temp;
     return first;
 }
 
@@ -298,7 +301,24 @@ samochod* tymczas(samochod* temp)
     temp->model=(char*)malloc(sizeof(char)*MODEL);
     temp->marka=(char*)malloc(sizeof(char)*MARKA);
     temp->nastepny=NULL;
+    temp->poprzedni=NULL;
     return temp;
+}
+
+samochod* usun_1(samochod* first,samochod *temp)
+{
+    if (temp->nastepny)
+        temp->nastepny->poprzedni=temp->poprzedni; //nastepnemu (jezeli jest) przypisuje poprzedni
+
+    if (temp->poprzedni)
+        temp->poprzedni->nastepny=temp->nastepny;//poprzedniemu (jezeli jest) przypisuje nastepny
+    else
+        first=temp->nastepny;
+
+    free(temp->marka);
+    free(temp->model);
+    free(temp);
+    return first;
 }
 
 samochod* wczytaj_bufor(d_prog* dane, samochod* lista,samochod* temp)
@@ -369,7 +389,7 @@ void wyswietl(samochod *first)
 
     else
     {
-        printf("BAZA DANYCH KOMISU SMAOCHODOWEGO\n\n");
+        printf("BAZA DANYCH KOMISU SAMOCHODOWEGO\n\n");
         printf("Nr   Marka          Model          cena      przebieg\n");
         printf("---------------------------------------------------------");
         do
@@ -390,6 +410,7 @@ void wyswietl(samochod *first)
             ilosc=printf("%d",first->przebieg);
             for(j=0; j<(10-ilosc); j++)
                 printf(" ");
+            printf("%d %d %d",first,first->nastepny,first->poprzedni);
             first=first->nastepny;
         }
         while(first!=NULL);

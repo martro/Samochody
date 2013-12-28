@@ -29,9 +29,28 @@ samochod* funkcja_menu_21(samochod* temp, samochod* lista)
 
     return lista;
 }
-samochod* funkcja_menu_23(samochod* lista)
+samochod* funkcja_menu_23(samochod* lista,samochod* temp)
 {
-//funkcja usun
+    int wybor,error=1;
+    printf("\nUSUWANIE SAMOCHODU Z BAZY\n\n");
+    wyswietl(lista);
+    printf("\nKtory samochod usunac?\nWybor:");
+
+    do
+    {
+        error=0;
+        scanf("%d",&wybor);
+        error=printf("\nwybor: %d\n",wybor);
+
+        if (error==0)
+            printf("Niepoprawny wybor. Wybierz jeszcze raz.\n");
+    }
+    while (error==0);
+
+    temp=pozycja(wybor,lista);
+    printf("%s",temp->model);
+    lista=usun_1(lista,temp);
+
     return lista;
 }
 
@@ -127,7 +146,7 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
     }
     case 23:
     {
-        lista=funkcja_menu_23(lista);
+        lista=funkcja_menu_23(lista,temp);
         break;
     }
     case 31:
