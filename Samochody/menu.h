@@ -3,6 +3,7 @@
 
 void funkcja_menu_11();
 void funkcja_menu_21();
+void funkcja_menu_23();
 void funkcja_menu_31();
 void funkcja_menu_32();
 void funkcja_menu_33();
@@ -20,6 +21,10 @@ void funkcja_menu_21()
     temp=tymczas();
     temp=edytuj(temp);
     lista=push(lista,temp);
+}
+void funkcja_menu_23()
+{
+//funkcja usun
 }
 
 void funkcja_menu_31()
@@ -58,7 +63,7 @@ int menu_glowne()
                "12 SORTUJ\n"
                "13 SZUKAJ\n\n"
                "21 DODAJ NOWY SAMOCHOD\n"
-               "21 EDYTUJ DANE SAMOCHODU\n"
+               "22 EDYTUJ DANE SAMOCHODU\n"
                "23 USUN SAMOCHOD\n\n"
                "31 ZAPISZ BUFOR\n"
                "32 WCZYTAJ BUFOR\n"
@@ -69,7 +74,7 @@ int menu_glowne()
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==21)||(wybor==31)||(wybor==32)||(wybor==33)||(wybor==0))
+            if ((wybor==11)||(wybor==21)||(wybor==23)||(wybor==31)||(wybor==32)||(wybor==33)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -100,6 +105,11 @@ int menu_glowne()
     case 21:
     {
         funkcja_menu_21();
+        break;
+    }
+    case 23:
+    {
+        funkcja_menu_23();
         break;
     }
     case 31:

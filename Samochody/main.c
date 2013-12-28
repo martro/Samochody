@@ -12,6 +12,7 @@
 int main()
 {
     int dzialaj;
+    char znak;
     printf("Laboratorium Programowanie w C\n"
            "Baza danych komisu samochodowego\n"
            "Prowadzacy: mgr inz. Mariusz Ostrowski\n"
@@ -32,8 +33,8 @@ int main()
     {
         printf("W buforze znajduja sie dane.\nZapisac przed wylaczeniem programu?");
         printf("Aby wyjsc bez zapisywania nacisnij 'n'.\nWybor: ");
-        getchar();
-        if (getchar()!='n')
+        znak=getchar();
+        if (znak!='n')
         {
             zapisz_bufor(lista,dane);
         }
