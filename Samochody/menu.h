@@ -1,35 +1,42 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-void funkcja_menu_11();
-void funkcja_menu_21();
-void funkcja_menu_23();
-void funkcja_menu_31();
-void funkcja_menu_32();
-void funkcja_menu_33();
 
-int menu_glowne();
+samochod* funkcja_menu_11();
+samochod* funkcja_menu_21(samochod* temp,samochod* lista);
+samochod* funkcja_menu_23();
+samochod* funkcja_menu_31();
+samochod* funkcja_menu_32();
+samochod* funkcja_menu_33();
+
+samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj);
 void zatwierdz(void);
 
-void funkcja_menu_11(samochod* lista)
+samochod* funkcja_menu_11(samochod* lista)
 {
     wyswietl(lista);
+    return lista;
 }
 
-void funkcja_menu_21(samochod* temp, samochod* lista)
+
+samochod* funkcja_menu_21(samochod* temp, samochod* lista)
+
 {
     temp=tymczas(temp);
     temp=edytuj(temp);
     printf("\ntest: %s\n",temp->marka);
     lista=push(lista,temp);
-    printf("\ntest: %s\n",lista->marka);
+
+    return lista;
 }
-void funkcja_menu_23()
+samochod* funkcja_menu_23(samochod* lista)
 {
 //funkcja usun
+    return lista;
 }
 
-void funkcja_menu_31(samochod* lista,d_prog* dane)
+samochod* funkcja_menu_31(samochod* lista,d_prog* dane)
+
 {
     zapisz_bufor(lista,dane);
     printf("\nZapisano pomyslnie.\n\nCzy usunac dane z bufora?\n");
@@ -37,19 +44,24 @@ void funkcja_menu_31(samochod* lista,d_prog* dane)
     getchar();
     if (getchar()=='t')
         lista=clear(lista);
+    return lista;
 
 }
 
-void funkcja_menu_32(samochod* lista,d_prog* dane, samochod* temp)
+samochod* funkcja_menu_32(samochod* lista,d_prog* dane, samochod* temp)
 {
     lista=wczytaj_bufor(dane, lista, temp);
+    return lista;
+
 }
-void funkcja_menu_33(samochod* lista)
+samochod* funkcja_menu_33(samochod* lista)
 {
     lista=clear(lista);
+    return lista;
 }
 
-int menu_glowne(samochod* lista,samochod* temp,d_prog* dane)
+samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
+
 {
     int wybor;
     char blad_odczytu;
@@ -102,38 +114,43 @@ int menu_glowne(samochod* lista,samochod* temp,d_prog* dane)
     {
     case 11:
     {
-        funkcja_menu_11(lista);
+
+        lista=funkcja_menu_11(lista);
+        return lista;
         break;
     }
     case 21:
     {
-        funkcja_menu_21(temp,lista);
+        lista=funkcja_menu_21(temp,lista);
+        return lista;
         break;
     }
     case 23:
     {
-        funkcja_menu_23();
+        lista=funkcja_menu_23(lista);
         break;
     }
     case 31:
     {
-        funkcja_menu_31(lista,dane);
+        lista=funkcja_menu_31(lista,dane);
         break;
     }
     case 32:
     {
-        funkcja_menu_32(lista,dane,temp);
+        lista=funkcja_menu_32(lista,dane,temp);
+        return lista;
         break;
     }
     case 33:
     {
-        funkcja_menu_33(lista);
+        lista=funkcja_menu_33(lista);
+        return lista;
         break;
     }
 
     case 0:
     {
-        return 0;
+        *dzialaj=0;
         break;
     }
 
@@ -142,8 +159,7 @@ int menu_glowne(samochod* lista,samochod* temp,d_prog* dane)
         break;
     }
     }
-
-    return wybor;
+    return lista;
 }
 
 void zatwierdz(void)

@@ -12,7 +12,14 @@
 
 int main()
 {
+<<<<<<< HEAD
+    int dzialaj;
+    char znak;
 
+samochod *lista=NULL;
+samochod *temp=NULL;
+d_prog* dane=NULL;
+=======
     int dzialaj=1;
     //int czydane=0,czynazwa;
     //char* nazwapliku;
@@ -22,18 +29,28 @@ int main()
     samochod *temp=NULL;
     d_prog* dane=NULL;
     dane=init(dane);
+>>>>>>> origin/proba-naprawy-globalnych
 
     printf("Laboratorium Programowanie w C\n"
            "Baza danych komisu samochodowego\n"
            "Prowadzacy: mgr inz. Mariusz Ostrowski\n"
            "Marcin Trojan 205608 MTR W-10\n");
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/proba-naprawy-globalnych
 
     dane=init(dane);
 
     do
     {
+<<<<<<< HEAD
+        dzialaj=menu_glowne(lista,temp,dane);
+        printf("nazwa: %s",lista->marka);
+=======
         lista=menu_glowne(lista,temp,dane,&dzialaj);
+>>>>>>> origin/proba-naprawy-globalnych
         zatwierdz();
     }
     while (dzialaj);

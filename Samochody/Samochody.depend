@@ -1,12 +1,23 @@
 # depslib dependency file v1.0
-1388239716 source:c:\users\martro\documents\github\samochody\samochody\main.c
+3083856 
+
+1388264134 source:c:\users\martro\documents\github\samochody\samochody\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"struktura.h"
 	"menu.h"
 
-1388239716 c:\users\martro\documents\github\samochody\samochody\menu.h
+1388263565 gin/proba-naprawy-globalnych
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"struktura.h"
+	"menu.h"
 
-1388239030 c:\users\martro\documents\github\samochody\samochody\struktura.h
+1388261987 D
+
+1388264332 c:\users\martro\documents\github\samochody\samochody\menu.h
+
+1388264351 c:\users\martro\documents\github\samochody\samochody\struktura.h
 
