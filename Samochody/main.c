@@ -12,8 +12,9 @@
 
 int main()
 {
-    int dzialaj=1,czydane=0,czynazwa;
-    char* nazwapliku;
+    int dzialaj=1;
+    //int czydane=0,czynazwa;
+    //char* nazwapliku;
     char znak;
 
     samochod *lista=NULL;

@@ -281,11 +281,6 @@ samochod* push(samochod *first, samochod *newone)
     return first;
 }
 
-
-void test(samochod *temp)
-{
-    temp->model="abcd";
-}
 int rozmiar(samochod* first)
 {
     int i=0;
@@ -317,21 +312,19 @@ samochod* wczytaj_bufor(d_prog* dane, samochod* lista,samochod* temp)
         printf("\nWczytywanie pliku %s",dane->nazwapliku);
         printf("\nWybierz akcje:"
                "\n1 - domyslna lokalizacja\n"
-               "\n2 - wybranaa nazwa\n");
+               "\n2 - wybrana nazwa\n");
         while((getchar()) != '\n');
         wybor=getchar();
         printf("\nwybor: %d\n",wybor);
 
         if (wybor=='1')
-            dane->nazwapliku="data.dat";
+            strcpy (dane->nazwapliku,"data.dat");
+
         if (wybor=='2')
         {
-            getchar();
             printf("\nPODAJ NAZWE PLIKU (rozszerzenie: .dat): ");
             scanf("%s",dane->nazwapliku);
             printf("\nNAZWa PLIKU: %s",dane->nazwapliku);
-            getchar();
-            getchar();
         }
 
         printf("\nWczytywanie pliku: %s",dane->nazwapliku);
@@ -339,6 +332,7 @@ samochod* wczytaj_bufor(d_prog* dane, samochod* lista,samochod* temp)
 
         if (pFile!=NULL)
         {
+            dane->czynazwa=1;
             do
             {
                 znak=fgetc(pFile);
@@ -436,9 +430,10 @@ void zapisz_bufor(samochod* first,d_prog* dane)
             }
             else if (wybor=='3')
             {
+                getchar();
                 printf("\nPODAJ NAZWE PLIKU (rozszerzenie: .dat): ");
                 scanf("%s",dane->nazwapliku);
-                printf("\nwybor %s",dane->nazwapliku);
+                printf("\nNAZWa PLIKU: %s",dane->nazwapliku);
                 error=0;
             }
 
