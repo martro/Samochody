@@ -23,6 +23,7 @@ typedef struct d_prog
 {
     char* nazwapliku;
     int czynazwa;
+    int czywczytane;
 } d_prog;
 
 

@@ -5,7 +5,7 @@ void funkcja_menu_11();
 samochod* funkcja_menu_21(samochod* temp,samochod* lista);
 void funkcja_menu_23();
 void funkcja_menu_31();
-void funkcja_menu_32();
+samochod* funkcja_menu_32();
 samochod* funkcja_menu_33();
 
 samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj);
@@ -21,9 +21,6 @@ samochod* funkcja_menu_21(samochod* temp, samochod* lista)
     temp=tymczas(temp);
     temp=edytuj(temp);
     lista=push(lista,temp);
-        printf("\nmain lista model: %s",temp->model);
-        printf("\nmain lista model: %s",lista->model);
-        getchar();
     return lista;
 }
 void funkcja_menu_23()
@@ -42,9 +39,11 @@ void funkcja_menu_31(samochod* lista,d_prog* dane)
 
 }
 
-void funkcja_menu_32(samochod* lista,d_prog* dane, samochod* temp)
+samochod* funkcja_menu_32(samochod* lista,d_prog* dane, samochod* temp)
 {
     lista=wczytaj_bufor(dane, lista, temp);
+    return lista;
+
 }
 samochod* funkcja_menu_33(samochod* lista)
 {
@@ -125,7 +124,8 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
     }
     case 32:
     {
-        funkcja_menu_32(lista,dane,temp);
+        lista=funkcja_menu_32(lista,dane,temp);
+        return lista;
         break;
     }
     case 33:

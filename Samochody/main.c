@@ -30,8 +30,6 @@ int main()
     do
     {
         lista=menu_glowne(lista,temp,dane,&dzialaj);
-        //printf("\nmain lista model: %s",temp->model);
-        //printf("\nmain lista model: %s",lista->model);
         zatwierdz();
     }
     while (dzialaj);
