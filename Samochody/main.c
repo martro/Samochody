@@ -12,10 +12,7 @@
 
 int main()
 {
-
     int dzialaj=1;
-    //int czydane=0,czynazwa;
-    //char* nazwapliku;
     char znak;
 
     samochod *lista=NULL;
@@ -27,7 +24,6 @@ int main()
            "Baza danych komisu samochodowego\n"
            "Prowadzacy: mgr inz. Mariusz Ostrowski\n"
            "Marcin Trojan 205608 MTR W-10\n");
-
 
     dane=init(dane);
 
@@ -44,15 +40,11 @@ int main()
         printf("Aby wyjsc bez zapisywania nacisnij 'n'.\nWybor: ");
         znak=getchar();
         if (znak!='n')
-        {
             zapisz_bufor(lista,dane);
-        }
-
     }
 
 
     lista=clear(lista);
-
     free(dane->nazwapliku);
     free(dane);
     printf("\nPROGRAM ZAKONCZYL DZIALANIE POPRAWNIE\n\n");

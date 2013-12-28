@@ -1,16 +1,16 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-
 samochod* funkcja_menu_11();
 samochod* funkcja_menu_21(samochod* temp,samochod* lista);
 samochod* funkcja_menu_23();
 samochod* funkcja_menu_31();
 samochod* funkcja_menu_32();
 samochod* funkcja_menu_33();
-
 samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj);
 void zatwierdz(void);
+
+
 
 samochod* funkcja_menu_11(samochod* lista)
 {
@@ -18,9 +18,7 @@ samochod* funkcja_menu_11(samochod* lista)
     return lista;
 }
 
-
 samochod* funkcja_menu_21(samochod* temp, samochod* lista)
-
 {
     temp=tymczas(temp);
     temp=edytuj(temp);
@@ -29,6 +27,7 @@ samochod* funkcja_menu_21(samochod* temp, samochod* lista)
 
     return lista;
 }
+
 samochod* funkcja_menu_23(samochod* lista,samochod* temp)
 {
     int wybor,error=1;
@@ -55,7 +54,6 @@ samochod* funkcja_menu_23(samochod* lista,samochod* temp)
 }
 
 samochod* funkcja_menu_31(samochod* lista,d_prog* dane)
-
 {
     zapisz_bufor(lista,dane);
     printf("\nZapisano pomyslnie.\n\nCzy usunac dane z bufora?\n");
@@ -64,15 +62,14 @@ samochod* funkcja_menu_31(samochod* lista,d_prog* dane)
     if (getchar()=='t')
         lista=clear(lista);
     return lista;
-
 }
 
 samochod* funkcja_menu_32(samochod* lista,d_prog* dane, samochod* temp)
 {
     lista=wczytaj_bufor(dane, lista, temp);
     return lista;
-
 }
+
 samochod* funkcja_menu_33(samochod* lista)
 {
     lista=clear(lista);
@@ -80,11 +77,9 @@ samochod* funkcja_menu_33(samochod* lista)
 }
 
 samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
-
 {
     int wybor;
     char blad_odczytu;
-
 
     do
     {
@@ -174,9 +169,7 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
     }
 
     default:
-    {
         break;
-    }
     }
     return lista;
 }

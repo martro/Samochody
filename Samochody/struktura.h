@@ -61,8 +61,7 @@ samochod* clear(samochod *first)
 samochod* edytuj(samochod *temp)
 {
     int error;
-    printf("Podaj dane samochodu.\n\n"
-           "Marka: ");
+    printf("Podaj dane samochodu.\n\nMarka: ");
     scanf("%s",temp->marka);
     printf("\nModel: ");
     scanf("%s",temp->model);
@@ -260,10 +259,6 @@ samochod* pozycja(int poz, samochod* first)
 
     for (i=0; i<poz; i++)
         first = first->nastepny;
-
-    //printf("\n\nNazwa pliku: %s\n", first->nazwa_pliku);
-
-
     return first;
 }
 
