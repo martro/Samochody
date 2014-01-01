@@ -26,7 +26,9 @@ samochod* funkcja_menu_12(samochod* lista,samochod*temp)
     do
     {
         printf("Sortowanie wg:\n");
-        printf("\n1 - Ceny malejaco\n2-Ceny rosnaco\n");
+        printf("\n1 - Ceny rosnaco\n2-Ceny malejaco\n");
+        printf("\n3 - Marki rosnaco\n4-Marki malejaco\n");
+        printf("\n5 - Modelu rosnaco\n6-Modelu malejaco\n");
         printf("Wybor: ");
         error=0;
         if (scanf("%d",&wybor)==0)
@@ -44,39 +46,114 @@ samochod* funkcja_menu_12(samochod* lista,samochod*temp)
     }
     while(error==1);
 
-    if (wybor==1)
+
+
+    if (wybor==1)//cena rosnaco
     {
-    do
-    {
-        for (i=1; i<n; i++)
+        do
         {
-            temp=pozycja(i,lista);
-            if ((temp->nastepny->cena)>(temp->cena))
+            for (i=1; i<n; i++)
             {
-                printf("\n%d %d",temp->nastepny->cena,temp->cena);
-                lista=zamien2(lista,temp,i);
+                temp=pozycja(i,lista);
+                if ((temp->nastepny->cena)<(temp->cena))
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
             }
+            n--;
         }
-        n--;
+        while(n>0);
     }
-    while(n>0);
-    }
-    if (wybor==2)
+
+    if (wybor==2)//cena malejaco
     {
-    do
-    {
-        for (i=1; i<n; i++)
+        do
         {
-            temp=pozycja(i,lista);
-            if ((temp->nastepny->cena)<(temp->cena))
+            for (i=1; i<n; i++)
             {
-                printf("\n%d %d",temp->nastepny->cena,temp->cena);
-                lista=zamien2(lista,temp,i);
+                temp=pozycja(i,lista);
+                if ((temp->nastepny->cena)>(temp->cena))
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
             }
+            n--;
         }
-        n--;
+        while(n>0);
     }
-    while(n>0);
+
+   if (wybor==3)//marka rosnaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->marka,temp->marka)<0)
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+
+    if (wybor==4)//marka malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->marka,temp->marka)>0)
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+   if (wybor==5)//model rosnaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->model,temp->model)<0)
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+
+    if (wybor==6)//model malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->model,temp->model)>0)
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
     }
 
     return lista;
