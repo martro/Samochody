@@ -21,7 +21,64 @@ samochod* funkcja_menu_11(samochod* lista)
 
 samochod* funkcja_menu_12(samochod* lista,samochod*temp)
 {
-    lista=zamien2(lista,temp,2);
+    int i,n,error,wybor;
+    n=rozmiar(lista);
+    do
+    {
+        printf("Sortowanie wg:\n");
+        printf("\n1 - Ceny malejaco\n2-Ceny rosnaco\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&wybor)==0)
+        {
+            error=1;
+            printf("W.\n");
+            getchar();
+        }
+        else if ((wybor<1)||(wybor>6))
+        {
+            printf("Nieprawidlowy wybor.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    if (wybor==1)
+    {
+    do
+    {
+        for (i=1; i<n; i++)
+        {
+            temp=pozycja(i,lista);
+            if ((temp->nastepny->cena)>(temp->cena))
+            {
+                printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                lista=zamien2(lista,temp,i);
+            }
+        }
+        n--;
+    }
+    while(n>0);
+    }
+    if (wybor==2)
+    {
+    do
+    {
+        for (i=1; i<n; i++)
+        {
+            temp=pozycja(i,lista);
+            if ((temp->nastepny->cena)<(temp->cena))
+            {
+                printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                lista=zamien2(lista,temp,i);
+            }
+        }
+        n--;
+    }
+    while(n>0);
+    }
+
     return lista;
 }
 

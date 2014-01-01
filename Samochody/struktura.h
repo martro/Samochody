@@ -407,7 +407,7 @@ void wyswietl(samochod *first)
             ilosc=printf("%d",first->przebieg);
             for(j=0; j<(10-ilosc); j++)
                 printf(" ");
-            printf("%d %d %d",first,first->nastepny,first->poprzedni);
+           // printf("%d %d %d",first,first->nastepny,first->poprzedni);
             first=first->nastepny;
         }
         while(first!=NULL);
@@ -422,18 +422,20 @@ samochod* zamien2(samochod* bierz,samochod *temp,int n)
     if (bierz->nastepny)
     {
         temp=bierz->nastepny->nastepny;  //kopia pozycji D
-        bierz->nastepny->nastepny->poprzedni=bierz;  //zamianna poprzD z C na B
+        if (bierz->nastepny->nastepny)
+            bierz->nastepny->nastepny->poprzedni=bierz;  //zamianna poprzD z C na B
         bierz->nastepny->nastepny=bierz;  //zamiana nastC z D na B
         bierz->nastepny->poprzedni=bierz->poprzedni;  //zamiana poprzC z B na A
-        bierz->poprzedni->nastepny=bierz->nastepny;  //zamiana nastA z B na C
+        if (bierz->poprzedni) //jezeli B jest pierwszym el.
+            bierz->poprzedni->nastepny=bierz->nastepny;  //zamiana nastA z B na C
         bierz->poprzedni=bierz->nastepny;
         bierz->nastepny=temp;
     }
 
 
-    free(temp->marka);
+   /* free(temp->marka);
     free(temp->model);
-    free(temp);
+    free(temp);*/
 
     while (bierz->poprzedni)
         bierz=bierz->poprzedni;
