@@ -42,7 +42,7 @@ int main()
             zapisz_bufor(lista,dane);
     }
 
-    clear(lista);
+    lista=clear(lista);
     free(dane->nazwapliku);
     free(dane);
     printf("\nPROGRAM ZAKONCZYL DZIALANIE POPRAWNIE\n\n");

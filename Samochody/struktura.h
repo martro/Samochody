@@ -40,6 +40,7 @@ samochod* tymczas();
 samochod* usun_1(samochod *lista,samochod* temp);
 samochod* wczytaj_bufor();
 void wyswietl(samochod *first);
+samochod* zamien2(samochod* bierz, samochod* temp,int n);
 void zapisz_bufor(samochod* temp,d_prog* dane);
 
 
@@ -412,6 +413,31 @@ void wyswietl(samochod *first)
         while(first!=NULL);
         printf("\n---------------------------------------------------------\n");
     }
+}
+
+samochod* zamien2(samochod* bierz,samochod *temp,int n)
+{
+    bierz=pozycja(n,bierz);
+
+    if (bierz->nastepny)
+    {
+        temp=bierz->nastepny->nastepny;  //kopia pozycji D
+        bierz->nastepny->nastepny->poprzedni=bierz;  //zamianna poprzD z C na B
+        bierz->nastepny->nastepny=bierz;  //zamiana nastC z D na B
+        bierz->nastepny->poprzedni=bierz->poprzedni;  //zamiana poprzC z B na A
+        bierz->poprzedni->nastepny=bierz->nastepny;  //zamiana nastA z B na C
+        bierz->poprzedni=bierz->nastepny;
+        bierz->nastepny=temp;
+    }
+
+
+    free(temp->marka);
+    free(temp->model);
+    free(temp);
+
+    while (bierz->poprzedni)
+        bierz=bierz->poprzedni;
+    return bierz;
 }
 
 void zapisz_bufor(samochod* first,d_prog* dane)

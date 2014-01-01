@@ -2,6 +2,7 @@
 #define MENU_H_INCLUDED
 
 samochod* funkcja_menu_11();
+samochod* funkcja_menu_12(samochod*lista, samochod* temp);
 samochod* funkcja_menu_21(samochod* temp,samochod* lista);
 samochod* funkcja_menu_23();
 samochod* funkcja_menu_31();
@@ -15,6 +16,12 @@ void zatwierdz(void);
 samochod* funkcja_menu_11(samochod* lista)
 {
     wyswietl(lista);
+    return lista;
+}
+
+samochod* funkcja_menu_12(samochod* lista,samochod*temp)
+{
+    lista=zamien2(lista,temp,2);
     return lista;
 }
 
@@ -103,7 +110,7 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==21)||(wybor==23)||(wybor==31)||(wybor==32)||(wybor==33)||(wybor==0))
+            if ((wybor==11)||(wybor==12)||(wybor==21)||(wybor==23)||(wybor==31)||(wybor==32)||(wybor==33)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -130,6 +137,13 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
     {
 
         lista=funkcja_menu_11(lista);
+        return lista;
+        break;
+    }
+    case 12:
+    {
+
+        lista=funkcja_menu_12(lista,temp);
         return lista;
         break;
     }
