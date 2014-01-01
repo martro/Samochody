@@ -65,7 +65,7 @@ samochod* clear(samochod *first)
 
 samochod* dodajlos(samochod *temp)
 {
-    int error,i,dlugosc=10;
+    int i,dlugosc;
     char znak;
 
     znak=spolgloska();
@@ -73,6 +73,9 @@ samochod* dodajlos(samochod *temp)
 
     strcpy(temp->marka,&znak);
     temp->marka[1]=0;
+
+    dlugosc=rand()%10;
+    dlugosc+=2;
     for (i=2; i<dlugosc; i++)
     {
         if (i%2==0)
@@ -83,173 +86,54 @@ samochod* dodajlos(samochod *temp)
         strcat(temp->marka,&znak);
         temp->marka[i]=0;
     }
-    printf("\nTEST: %s",temp->marka);
+    printf("\nTEST: %s\n\n",temp->marka);
+
+
+    znak=spolgloska();
+    znak-=32;
+
+    strcpy(temp->model,&znak);
+    temp->model[1]=0;
+
+    dlugosc=rand()%10;
+    dlugosc+=2;
+    for (i=2; i<dlugosc; i++)
+    {
+        if (i%2==0)
+        znak=samogloska();
+        else
+        znak=spolgloska();
+
+        strcat(temp->model,&znak);
+        temp->model[i]=0;
+    }
+
     getchar();
     getchar();
-    printf("\nModel: ");
-    scanf("%s",temp->model);
-    printf("\nTEST: %s",temp->model);
 
-    getchar();
-    getchar();
-    do
-    {
-        podkreslenie();
-        printf("\nCena: ");
-        error=0;
-        if (scanf("%d",&temp->cena)==0)
-        {
-            error=1;
-            printf("Wprowadzona cena jest nieprawidlowa.\n");
-            getchar();
-        }
-        else if (temp->cena<0)
-        {
-            printf("Cena nie moze byc ujemna.\n");
-            error=1;
-            getchar();
-        }
-    }
-    while(error==1);
+    temp->cena=(rand()%200+1)*1000;
 
+    printf("\nTEST: %d\n\n",temp->cena);
 
-    do
-    {
-        podkreslenie();
-        printf("\nPrzebieg: ");
-        error=0;
-        if (scanf("%d",&temp->przebieg)==0)
-        {
-            error=1;
-            printf("Wprowadzony przebieg jest nieprawidlowy.\n");
-            getchar();
-        }
-        else if (temp->przebieg<0)
-        {
-            printf("Przebieg nie moze byc ujemny.\n");
-            error=1;
-            getchar();
-        }
-    }
-    while(error==1);
+    temp->przebieg=(rand()%350+50)*1000;
 
-    do
-    {
-        podkreslenie();
-        printf("\nRok produkcji: ");
-        error=0;
-        if (scanf("%d",&temp->rok)==0)
-        {
-            error=1;
-            printf("Wprowadzony rok produkcji jest nieprawidlowy.\n");
-            getchar();
-        }
-        else if ((temp->rok)<1950)
-        {
-            printf("Rok produkcji nie moze byc mniejszy niz 1950.\n");
-            error=1;
-            getchar();
-        }
-        else if ((temp->rok)>2014)
-        {
-            printf("Rok produkcji nie moze byc wiekszy niz 2014.\n");
-            error=1;
-            getchar();
-        }
-    }
-    while(error==1);
+    printf("\nTEST: %d\n\n",temp->przebieg);
 
-    do
-    {
-        podkreslenie();
-        printf("\nSpalanie");
-        error=0;
-        if (scanf("%f",&temp->spalanie)==0)
-        {
-            error=1;
-            printf("Wprowadzone spalanie jest nieprawidlowe.\n");
-            getchar();
-        }
-        else if ((temp->spalanie)<=0)
-        {
-            printf("Spalanie nie moze byc ujemne.\n");
-            error=1;
-            getchar();
-        }
-        else if ((temp->spalanie)>25)
-        {
-            printf("Spalanie nie moze byc wieksze niz 25.\n");
-            error=1;
-            getchar();
-        }
-    }
-    while(error==1);
+    temp->rok=(rand()%64)+1950;
+    printf("\nTEST: %d\n\n",temp->rok);
 
-    do
-    {
-        podkreslenie();
-        printf("Samochod nowy czy uzywany?\n");
-        printf("\n1 - Nowy\n2-Uzywany\n");
-        printf("Wybor: ");
-        error=0;
-        if (scanf("%d",&temp->nowyuzywany)==0)
-        {
-            error=1;
-            printf("Wprowadzony parametr jest nieprawidlowy.\n");
-            getchar();
-        }
-        else if (((temp->nowyuzywany)!=1)&&((temp->nowyuzywany)!=2))
-        {
-            printf("Nieprawidlowy wybor.\n");
-            error=1;
-            getchar();
-        }
-    }
-    while(error==1);
+    temp->spalanie=(rand()%150+50)/10.;
+    printf("\nTEST: %.1f\n\n",temp->spalanie);
 
-    do
-    {
-        podkreslenie();
-        printf("Samochod bezwypadkowy czy powypadkowy?\n");
-        printf("\n1 - Bezwypadkowy\n2-Powypadkowy\n");
-        printf("Wybor: ");
-        error=0;
-        if (scanf("%d",&temp->wypadek)==0)
-        {
-            error=1;
-            printf("Wprowadzony parametr jest nieprawidlowy.\n");
-            getchar();
-        }
-        else if (((temp->wypadek)!=1)&&((temp->wypadek)!=2))
-        {
-            printf("Nieprawidlowy wybor.\n");
-            error=1;
-            getchar();
-        }
-    }
-    while(error==1);
+    temp->nowyuzywany=rand()%2+1;
+    printf("\nTEST: %d\n\n",temp->nowyuzywany);
 
-    do
-    {
-        podkreslenie();
-        printf("Rodzaj paliwa\n");
-        printf("\n1 - Benzyna\n2-Diesel\n3-Gaz\n");
-        printf("Wybor: ");
-        error=0;
-        if (scanf("%d",&temp->paliwo)==0)
-        {
-            error=1;
-            printf("Wprowadzony rodzaj paliwa jest nieprawidlowy.\n");
-            getchar();
-        }
-        else if (((temp->paliwo)!=1)&&((temp->paliwo)!=2)&&((temp->paliwo)!=3))
-        {
-            printf("Nieprawidlowy wybor paliwa.\n");
-            error=1;
-            getchar();
-        }
-    }
-    while(error==1);
+    temp->wypadek=rand()%2+1;
+    printf("\nTEST: %d\n\n",temp->wypadek);
+
+    temp->paliwo=rand()%3+1;
+    printf("\nTEST: %d\n\n",temp->paliwo);
+
     return temp;
 }
 

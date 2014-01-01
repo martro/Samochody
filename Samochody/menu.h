@@ -5,6 +5,7 @@ samochod* funkcja_menu_11();
 samochod* funkcja_menu_12(samochod*lista, samochod* temp);
 samochod* funkcja_menu_21(samochod* temp,samochod* lista);
 samochod* funkcja_menu_23();
+samochod* funkcja_menu_24(samochod* temp,samochod* lista);
 samochod* funkcja_menu_31();
 samochod* funkcja_menu_32();
 samochod* funkcja_menu_33();
@@ -60,6 +61,15 @@ samochod* funkcja_menu_23(samochod* lista,samochod* temp)
     return lista;
 }
 
+samochod* funkcja_menu_24(samochod* temp, samochod* lista)
+{
+    temp=tymczas(temp);
+    temp=dodajlos(temp);
+    lista=push(lista,temp);
+
+    return lista;
+}
+
 samochod* funkcja_menu_31(samochod* lista,d_prog* dane)
 {
     zapisz_bufor(lista,dane);
@@ -100,7 +110,8 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
                "13 SZUKAJ\n\n"
                "21 DODAJ NOWY SAMOCHOD\n"
                "22 EDYTUJ DANE SAMOCHODU\n"
-               "23 USUN SAMOCHOD\n\n"
+               "23 USUN SAMOCHOD\n"
+               "24 LOSUJ SAMOCHOD (opcja testowa)"
                "31 ZAPISZ BUFOR\n"
                "32 WCZYTAJ BUFOR\n"
                "33 USUN BUFOR BEZ ZAPISYWANIA\n\n"
@@ -110,7 +121,8 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==12)||(wybor==21)||(wybor==23)||(wybor==31)||(wybor==32)||(wybor==33)||(wybor==0))
+            if ((wybor==11)||(wybor==12)||(wybor==21)||(wybor==23)||(wybor==24)||(wybor==31)||
+                (wybor==32)||(wybor==33)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -156,6 +168,12 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
     case 23:
     {
         lista=funkcja_menu_23(lista,temp);
+        break;
+    }
+    case 24:
+    {
+        lista=funkcja_menu_24(temp,lista);
+        return lista;
         break;
     }
     case 31:

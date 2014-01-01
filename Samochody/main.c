@@ -27,9 +27,6 @@ int main()
     srand(time(NULL));
     dane=init(dane);
 
-/*
-    temp=tymczas(temp);
-    dodajlos(temp);*/
 
     do
     {
