@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "struktura.h"
 #include "menu.h"
 
@@ -23,8 +24,12 @@ int main()
            "Baza danych komisu samochodowego\n"
            "Prowadzacy: mgr inz. Mariusz Ostrowski\n"
            "Marcin Trojan 205608 MTR W-10\n");
-
+    srand(time(NULL));
     dane=init(dane);
+
+/*
+    temp=tymczas(temp);
+    dodajlos(temp);*/
 
     do
     {

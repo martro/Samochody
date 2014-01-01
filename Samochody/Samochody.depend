@@ -21,14 +21,15 @@
 
 1388271669 c:\users\martro\documents\github\samochody\samochody\struktura.h
 
-1388589967 source:/home/martro/GitHub/Samochody/Samochody/main.c
+1388598388 source:/home/martro/GitHub/Samochody/Samochody/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<time.h>
 	"struktura.h"
 	"menu.h"
 
-1388591100 /home/martro/GitHub/Samochody/Samochody/struktura.h
+1388600744 /home/martro/GitHub/Samochody/Samochody/struktura.h
 
-1388595532 /home/martro/GitHub/Samochody/Samochody/menu.h
+1388596152 /home/martro/GitHub/Samochody/Samochody/menu.h
 

@@ -29,12 +29,16 @@ typedef struct d_prog
 
 
 samochod* clear(samochod *first);
+samochod* dodajlos(samochod *first);
 samochod* edytuj(samochod *first);
 d_prog* init(d_prog* dane);
 void podkreslenie(void);
 samochod* pozycja(int poz,samochod* first);
 samochod* push(samochod *first, samochod *newone);
 int rozmiar(samochod* first);
+char samogloska();
+samochod* sortuj(samochod* lista,samochod*temp);
+char spolgloska();
 void test(samochod *temp);
 samochod* tymczas();
 samochod* usun_1(samochod *lista,samochod* temp);
@@ -48,7 +52,7 @@ samochod* clear(samochod *first)
 {
     if (first==NULL)
     {
-        printf("W buforze nie ma dancyh.");
+        printf("W buforze nie ma danych.");
         return NULL;
     }
     clear (first->nastepny);
@@ -57,6 +61,196 @@ samochod* clear(samochod *first)
     free(first->model);
     free(first);
     return NULL;
+}
+
+samochod* dodajlos(samochod *temp)
+{
+    int error,i,dlugosc=10;
+    char znak;
+
+    znak=spolgloska();
+    znak-=32;
+
+    strcpy(temp->marka,&znak);
+    temp->marka[1]=0;
+    for (i=2; i<dlugosc; i++)
+    {
+        if (i%2==0)
+        znak=samogloska();
+        else
+        znak=spolgloska();
+
+        strcat(temp->marka,&znak);
+        temp->marka[i]=0;
+    }
+    printf("\nTEST: %s",temp->marka);
+    getchar();
+    getchar();
+    printf("\nModel: ");
+    scanf("%s",temp->model);
+    printf("\nTEST: %s",temp->model);
+
+    getchar();
+    getchar();
+    do
+    {
+        podkreslenie();
+        printf("\nCena: ");
+        error=0;
+        if (scanf("%d",&temp->cena)==0)
+        {
+            error=1;
+            printf("Wprowadzona cena jest nieprawidlowa.\n");
+            getchar();
+        }
+        else if (temp->cena<0)
+        {
+            printf("Cena nie moze byc ujemna.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+
+    do
+    {
+        podkreslenie();
+        printf("\nPrzebieg: ");
+        error=0;
+        if (scanf("%d",&temp->przebieg)==0)
+        {
+            error=1;
+            printf("Wprowadzony przebieg jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (temp->przebieg<0)
+        {
+            printf("Przebieg nie moze byc ujemny.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("\nRok produkcji: ");
+        error=0;
+        if (scanf("%d",&temp->rok)==0)
+        {
+            error=1;
+            printf("Wprowadzony rok produkcji jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if ((temp->rok)<1950)
+        {
+            printf("Rok produkcji nie moze byc mniejszy niz 1950.\n");
+            error=1;
+            getchar();
+        }
+        else if ((temp->rok)>2014)
+        {
+            printf("Rok produkcji nie moze byc wiekszy niz 2014.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("\nSpalanie");
+        error=0;
+        if (scanf("%f",&temp->spalanie)==0)
+        {
+            error=1;
+            printf("Wprowadzone spalanie jest nieprawidlowe.\n");
+            getchar();
+        }
+        else if ((temp->spalanie)<=0)
+        {
+            printf("Spalanie nie moze byc ujemne.\n");
+            error=1;
+            getchar();
+        }
+        else if ((temp->spalanie)>25)
+        {
+            printf("Spalanie nie moze byc wieksze niz 25.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("Samochod nowy czy uzywany?\n");
+        printf("\n1 - Nowy\n2-Uzywany\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&temp->nowyuzywany)==0)
+        {
+            error=1;
+            printf("Wprowadzony parametr jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (((temp->nowyuzywany)!=1)&&((temp->nowyuzywany)!=2))
+        {
+            printf("Nieprawidlowy wybor.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("Samochod bezwypadkowy czy powypadkowy?\n");
+        printf("\n1 - Bezwypadkowy\n2-Powypadkowy\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&temp->wypadek)==0)
+        {
+            error=1;
+            printf("Wprowadzony parametr jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (((temp->wypadek)!=1)&&((temp->wypadek)!=2))
+        {
+            printf("Nieprawidlowy wybor.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+    do
+    {
+        podkreslenie();
+        printf("Rodzaj paliwa\n");
+        printf("\n1 - Benzyna\n2-Diesel\n3-Gaz\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&temp->paliwo)==0)
+        {
+            error=1;
+            printf("Wprowadzony rodzaj paliwa jest nieprawidlowy.\n");
+            getchar();
+        }
+        else if (((temp->paliwo)!=1)&&((temp->paliwo)!=2)&&((temp->paliwo)!=3))
+        {
+            printf("Nieprawidlowy wybor paliwa.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+    return temp;
 }
 
 samochod* edytuj(samochod *temp)
@@ -291,6 +485,19 @@ int rozmiar(samochod* first)
     return i;
 }
 
+char spolgloska()
+{
+    char znak;
+    do
+    {
+        znak=(rand()%25+97);
+        printf("Wylosowano: %c",znak);
+    }
+    while((znak=='a')||(znak=='e')||(znak=='i')||(znak=='o')||(znak=='u')
+          ||(znak=='y')||(znak=='x')||(znak=='v')||(znak=='q'));
+    return znak;
+}
+
 samochod* tymczas(samochod* temp)
 {
     temp=(samochod *)malloc(sizeof(samochod));
@@ -299,6 +506,158 @@ samochod* tymczas(samochod* temp)
     temp->nastepny=NULL;
     temp->poprzedni=NULL;
     return temp;
+}
+
+samochod* sortuj(samochod* lista,samochod*temp)
+{
+    int i,n,error,wybor;
+    n=rozmiar(lista);
+    do
+    {
+        printf("Sortowanie wg:\n");
+        printf("\n1 - Ceny rosnaco\n2-Ceny malejaco\n");
+        printf("\n3 - Marki rosnaco\n4-Marki malejaco\n");
+        printf("\n5 - Modelu rosnaco\n6-Modelu malejaco\n");
+        printf("Wybor: ");
+        error=0;
+        if (scanf("%d",&wybor)==0)
+        {
+            error=1;
+            printf("W.\n");
+            getchar();
+        }
+        else if ((wybor<1)||(wybor>6))
+        {
+            printf("Nieprawidlowy wybor.\n");
+            error=1;
+            getchar();
+        }
+    }
+    while(error==1);
+
+
+
+    if (wybor==1)//cena rosnaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if ((temp->nastepny->cena)<(temp->cena))
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    if (wybor==2)//cena malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if ((temp->nastepny->cena)>(temp->cena))
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    if (wybor==3)//marka rosnaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->marka,temp->marka)<0)
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+
+    if (wybor==4)//marka malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->marka,temp->marka)>0)
+                {
+                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    if (wybor==5)//model rosnaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->model,temp->model)<0)
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+
+    if (wybor==6)//model malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (strcmp(temp->nastepny->model,temp->model)>0)
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    return lista;
+}
+
+char samogloska()
+{
+    char znak;
+    do
+    {
+        znak=(rand()%25+97);
+        printf("Wylosowano: %c",znak);
+    }
+    while((znak!='a')&&(znak!='e')&&(znak!='i')&&(znak!='o')&&(znak!='u'));
+    return znak;
 }
 
 samochod* usun_1(samochod* first,samochod *temp)
@@ -407,7 +766,7 @@ void wyswietl(samochod *first)
             ilosc=printf("%d",first->przebieg);
             for(j=0; j<(10-ilosc); j++)
                 printf(" ");
-           // printf("%d %d %d",first,first->nastepny,first->poprzedni);
+            // printf("%d %d %d",first,first->nastepny,first->poprzedni);
             first=first->nastepny;
         }
         while(first!=NULL);
@@ -433,9 +792,9 @@ samochod* zamien2(samochod* bierz,samochod *temp,int n)
     }
 
 
-   /* free(temp->marka);
-    free(temp->model);
-    free(temp);*/
+    /* free(temp->marka);
+     free(temp->model);
+     free(temp);*/
 
     while (bierz->poprzedni)
         bierz=bierz->poprzedni;
