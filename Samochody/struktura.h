@@ -333,6 +333,7 @@ samochod* wczytaj_bufor(d_prog* dane, samochod* lista,samochod* temp)
         printf("\nwybor: %d\n",wybor);
 
         if (wybor=='1')
+
             strcpy (dane->nazwapliku,"data.dat");
 
         if (wybor=='2')
@@ -435,7 +436,7 @@ void zapisz_bufor(samochod* first,d_prog* dane)
 
             if (wybor=='1')
             {
-                dane->nazwapliku="data.dat";
+                strcpy(dane->nazwapliku,"data.dat");
                 error=0;
             }
             else if (wybor=='2')

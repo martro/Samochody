@@ -18,7 +18,6 @@ int main()
     samochod *lista=NULL;
     samochod *temp=NULL;
     d_prog* dane=NULL;
-    dane=init(dane);
 
     printf("Laboratorium Programowanie w C\n"
            "Baza danych komisu samochodowego\n"
@@ -43,8 +42,7 @@ int main()
             zapisz_bufor(lista,dane);
     }
 
-
-    lista=clear(lista);
+    clear(lista);
     free(dane->nazwapliku);
     free(dane);
     printf("\nPROGRAM ZAKONCZYL DZIALANIE POPRAWNIE\n\n");
