@@ -378,9 +378,13 @@ samochod* sortuj(samochod* lista,samochod*temp)
     do
     {
         printf("Sortowanie wg:\n");
-        printf("\n1 - Ceny rosnaco\n2-Ceny malejaco\n");
-        printf("\n3 - Marki rosnaco\n4-Marki malejaco\n");
-        printf("\n5 - Modelu rosnaco\n6-Modelu malejaco\n");
+        printf("\n 1 - Ceny rosnaco\n 2-Ceny malejaco\n");
+        printf("\n 3 - Marki rosnaco\n 4-Marki malejaco\n");
+        printf("\n 5 - Modelu rosnaco\n 6-Modelu malejaco\n");
+        printf("\n 7 - Przebiegu rosnaco\n 8-Przebiegu malejaco\n");
+        printf("\n 9 - Paliwa"
+               "\n10 - Wypadek/bezwypadkowy"
+               "\n11 - Nowy/Uzywany\n");
         printf("Wybor: ");
         error=0;
         if (scanf("%d",&wybor)==0)
@@ -389,7 +393,7 @@ samochod* sortuj(samochod* lista,samochod*temp)
             printf("W.\n");
             getchar();
         }
-        else if ((wybor<1)||(wybor>6))
+        else if ((wybor<1)||(wybor>11))
         {
             printf("Nieprawidlowy wybor.\n");
             error=1;
@@ -504,6 +508,91 @@ samochod* sortuj(samochod* lista,samochod*temp)
         while(n>0);
     }
 
+    if (wybor==7)//przebieg rosnaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if ((temp->nastepny->przebieg)<(temp->przebieg))
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    if (wybor==8)//przebieg malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if ((temp->nastepny->przebieg)>(temp->przebieg))
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    if (wybor==9)//model malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (temp->nastepny->paliwo<temp->paliwo)
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    if (wybor==10)//model malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (temp->nastepny->wypadek<temp->wypadek)
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
+    if (wybor==11)//model malejaco
+    {
+        do
+        {
+            for (i=1; i<n; i++)
+            {
+                temp=pozycja(i,lista);
+                if (temp->nastepny->nowyuzywany<temp->nowyuzywany)
+                {
+                    lista=zamien2(lista,temp,i);
+                }
+            }
+            n--;
+        }
+        while(n>0);
+    }
+
     return lista;
 }
 
@@ -605,7 +694,7 @@ void wyswietl(samochod *first)
     {
         printf("\n                                      1-paliwo 2-wypadek/bezwypadkowy\n");
         printf("BAZA DANYCH KOMISU SAMOCHODOWEGO      3-nowy/uzywany\n");
-        printf("Nr   Marka          Model          cena      przebieg  spalanie   1   2   3\n");
+        printf("Nr   Marka          Model          cena      przebieg  spalanie    1  2  3\n");
         printf("---------------------------------------------------------------------------");
         do
         {
@@ -632,18 +721,18 @@ void wyswietl(samochod *first)
             for(j=0; j<(3-ilosc); j++)
                 printf(" ");
 
-            printf("      ");
+            printf("       ");
             if (first->paliwo==1)
-                printf("B   ");
+                printf("B  ");
             else if (first->paliwo==2)
-                printf("D   ");
+                printf("D  ");
             else if (first->paliwo==3)
-                printf("G   ");
+                printf("G  ");
 
             if (first->wypadek==1)
-                printf("B   ");
+                printf("B  ");
             else if (first->wypadek==2)
-                printf("W   ");
+                printf("W  ");
 
             if (first->nowyuzywany==1)
                 printf("N");

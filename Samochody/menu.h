@@ -38,16 +38,22 @@ samochod* funkcja_menu_21(samochod* temp, samochod* lista)
 
 samochod* funkcja_menu_23(samochod* lista,samochod* temp)
 {
-    int wybor,error=1;
+    int wybor,error=1,usunieto;
     printf("\nUSUWANIE SAMOCHODU Z BAZY\n\n");
     wyswietl(lista);
-    printf("\nKtory samochod usunac?\nWybor:");
 
+
+    while((lista)&&(usunieto==0))
+    {
+        usunieto=0;
     do
     {
+    printf("\nKtory samochod usunac?\nWybor:");
         error=0;
         scanf("%d",&wybor);
         error=printf("\nwybor: %d\n",wybor);
+        if ((wybor<=0)||(wybor>rozmiar(lista)))
+            error=0;
 
         if (error==0)
             printf("Niepoprawny wybor. Wybierz jeszcze raz.\n");
@@ -55,9 +61,14 @@ samochod* funkcja_menu_23(samochod* lista,samochod* temp)
     while (error==0);
 
     temp=pozycja(wybor,lista);
-    printf("%s",temp->model);
-    lista=usun_1(lista,temp);
+    printf("%s %s",temp->marka,temp->model);
+    if (temp)
 
+{
+lista=usun_1(lista,temp);
+usunieto=1;
+}
+    }
     return lista;
 }
 
