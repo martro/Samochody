@@ -75,19 +75,17 @@ samochod* dodajlos(samochod *temp)
     temp->marka[1]=0;
 
     dlugosc=rand()%10;
-    dlugosc+=2;
+    dlugosc+=3;
     for (i=2; i<dlugosc; i++)
     {
         if (i%2==0)
-        znak=samogloska();
+            znak=samogloska();
         else
-        znak=spolgloska();
+            znak=spolgloska();
 
         strcat(temp->marka,&znak);
         temp->marka[i]=0;
     }
-    printf("\nTEST: %s\n\n",temp->marka);
-
 
     znak=spolgloska();
     znak-=32;
@@ -100,39 +98,21 @@ samochod* dodajlos(samochod *temp)
     for (i=2; i<dlugosc; i++)
     {
         if (i%2==0)
-        znak=samogloska();
+            znak=samogloska();
         else
-        znak=spolgloska();
+            znak=spolgloska();
 
         strcat(temp->model,&znak);
         temp->model[i]=0;
     }
 
-    getchar();
-    getchar();
-
     temp->cena=(rand()%200+1)*1000;
-
-    printf("\nTEST: %d\n\n",temp->cena);
-
     temp->przebieg=(rand()%350+50)*1000;
-
-    printf("\nTEST: %d\n\n",temp->przebieg);
-
     temp->rok=(rand()%64)+1950;
-    printf("\nTEST: %d\n\n",temp->rok);
-
     temp->spalanie=(rand()%150+50)/10.;
-    printf("\nTEST: %.1f\n\n",temp->spalanie);
-
     temp->nowyuzywany=rand()%2+1;
-    printf("\nTEST: %d\n\n",temp->nowyuzywany);
-
     temp->wypadek=rand()%2+1;
-    printf("\nTEST: %d\n\n",temp->wypadek);
-
     temp->paliwo=rand()%3+1;
-    printf("\nTEST: %d\n\n",temp->paliwo);
 
     return temp;
 }
@@ -375,10 +355,9 @@ char spolgloska()
     do
     {
         znak=(rand()%25+97);
-        printf("Wylosowano: %c",znak);
     }
     while((znak=='a')||(znak=='e')||(znak=='i')||(znak=='o')||(znak=='u')
-          ||(znak=='y')||(znak=='x')||(znak=='v')||(znak=='q'));
+            ||(znak=='y')||(znak=='x')||(znak=='v')||(znak=='q'));
     return znak;
 }
 
@@ -430,7 +409,6 @@ samochod* sortuj(samochod* lista,samochod*temp)
                 temp=pozycja(i,lista);
                 if ((temp->nastepny->cena)<(temp->cena))
                 {
-                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
                     lista=zamien2(lista,temp,i);
                 }
             }
@@ -448,7 +426,6 @@ samochod* sortuj(samochod* lista,samochod*temp)
                 temp=pozycja(i,lista);
                 if ((temp->nastepny->cena)>(temp->cena))
                 {
-                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
                     lista=zamien2(lista,temp,i);
                 }
             }
@@ -466,7 +443,6 @@ samochod* sortuj(samochod* lista,samochod*temp)
                 temp=pozycja(i,lista);
                 if (strcmp(temp->nastepny->marka,temp->marka)<0)
                 {
-                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
                     lista=zamien2(lista,temp,i);
                 }
             }
@@ -485,7 +461,6 @@ samochod* sortuj(samochod* lista,samochod*temp)
                 temp=pozycja(i,lista);
                 if (strcmp(temp->nastepny->marka,temp->marka)>0)
                 {
-                    printf("\n%d %d",temp->nastepny->cena,temp->cena);
                     lista=zamien2(lista,temp,i);
                 }
             }
@@ -538,7 +513,6 @@ char samogloska()
     do
     {
         znak=(rand()%25+97);
-        printf("Wylosowano: %c",znak);
     }
     while((znak!='a')&&(znak!='e')&&(znak!='i')&&(znak!='o')&&(znak!='u'));
     return znak;
@@ -629,9 +603,10 @@ void wyswietl(samochod *first)
 
     else
     {
-        printf("BAZA DANYCH KOMISU SAMOCHODOWEGO\n\n");
-        printf("Nr   Marka          Model          cena      przebieg\n");
-        printf("---------------------------------------------------------");
+        printf("\n                                      1-paliwo 2-wypadek/bezwypadkowy\n");
+        printf("BAZA DANYCH KOMISU SAMOCHODOWEGO      3-nowy/uzywany\n");
+        printf("Nr   Marka          Model          cena      przebieg  spalanie   1   2   3\n");
+        printf("---------------------------------------------------------------------------");
         do
         {
             i++;
@@ -650,7 +625,36 @@ void wyswietl(samochod *first)
             ilosc=printf("%d",first->przebieg);
             for(j=0; j<(10-ilosc); j++)
                 printf(" ");
-            // printf("%d %d %d",first,first->nastepny,first->poprzedni);
+            if (first->spalanie/10<1)
+            printf(" %.2f",first->spalanie);
+            else
+            printf("%.2f",first->spalanie);
+            for(j=0; j<(3-ilosc); j++)
+                printf(" ");
+
+            printf("      ");
+            if (first->paliwo==1)
+                printf("B   ");
+            else if (first->paliwo==2)
+                printf("D   ");
+            else if (first->paliwo==3)
+                printf("G   ");
+
+            if (first->wypadek==1)
+                printf("B   ");
+            else if (first->wypadek==2)
+                printf("W   ");
+
+            if (first->nowyuzywany==1)
+                printf("N");
+            else if (first->nowyuzywany==2)
+                printf("U");
+
+
+
+            for(j=0; j<(10-ilosc); j++)
+                printf(" ");
+
             first=first->nastepny;
         }
         while(first!=NULL);

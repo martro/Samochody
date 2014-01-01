@@ -111,7 +111,7 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
                "21 DODAJ NOWY SAMOCHOD\n"
                "22 EDYTUJ DANE SAMOCHODU\n"
                "23 USUN SAMOCHOD\n"
-               "24 LOSUJ SAMOCHOD (opcja testowa)"
+               "24 LOSUJ SAMOCHOD (opcja testowa)\n\n"
                "31 ZAPISZ BUFOR\n"
                "32 WCZYTAJ BUFOR\n"
                "33 USUN BUFOR BEZ ZAPISYWANIA\n\n"
