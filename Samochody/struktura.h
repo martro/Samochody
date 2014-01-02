@@ -508,11 +508,12 @@ void szukaj(samochod *first)
             while(error==1);
         }
 
-        if (wybor==2)
+        if ((wybor==2)||(wybor==3))
         {
             printf("Wyszukaj fraze: ");
             scanf("%s",zdanie1);
         }
+
 
         if (wybor==4) //przebieg
         {
@@ -689,7 +690,7 @@ void szukaj(samochod *first)
                 if (((first->cena)>=min)&&((first->cena)<=max))
                     czywyswietlic=1;
 
-            if (wybor==2) //model
+            if (wybor==2) //marka
             {
                 gwiazdka=gdzie_gwiazdka(zdanie1);
 
@@ -718,6 +719,39 @@ void szukaj(samochod *first)
                     zdanie1_k[strlen(zdanie1_k)-1]='\0';
 
                     if (strstr(first->marka,zdanie1_k)!=NULL)
+                        czywyswietlic=1;
+                }
+            }
+
+            if (wybor==3) //model
+            {
+                gwiazdka=gdzie_gwiazdka(zdanie1);
+
+                if (gwiazdka==0)
+                {
+                    if (czy_dlugosci(zdanie1,first->model)==1)
+                        czywyswietlic=czy_rowne(zdanie1,first->model,0);
+                }
+
+                if (gwiazdka==1)
+                {
+                    wskaz=&zdanie1[1];
+                    strncpy(zdanie1_k,wskaz,strlen(zdanie1));
+                    czywyswietlic=czy_rowne(zdanie1_k,first->model,strlen(first->model)-strlen(zdanie1)+1);
+                }
+                if (gwiazdka==2)
+                {
+                    strncpy(zdanie1_k,zdanie1,strlen(zdanie1)-1);
+                    zdanie1_k[strlen(zdanie1)-1]='\0';
+                    czywyswietlic=czy_rowne(zdanie1_k,first->model,0);
+                }
+                if (gwiazdka==3)
+                {
+                    wskaz=&zdanie1[1];
+                    strncpy(zdanie1_k,wskaz,strlen(zdanie1));
+                    zdanie1_k[strlen(zdanie1_k)-1]='\0';
+
+                    if (strstr(first->model,zdanie1_k)!=NULL)
                         czywyswietlic=1;
                 }
             }
