@@ -135,6 +135,7 @@ samochod* dodajlos(samochod *temp)
     temp->wypadek=rand()%2+1;
     temp->paliwo=rand()%3+1;
 
+    printf("DODANO: %s %s",temp->marka,temp->model);
     return temp;
 }
 

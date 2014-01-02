@@ -1,0 +1,68 @@
+%%%%%%%%%%%%%%% Początek %%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt]{article}
+\usepackage{polski}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{url}
+\usepackage {wrapfig}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,
+	rulecolor=,
+	language=matlab,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+        language=C,
+}
+
+\title{Baza danych komisu samochodowego}
+\author{Marcin Trojan}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{O programie}
+Program to prosta aplikacja bazodanowa, napisana w języku C.
+
+\subsection{Opis funkcji menu}
+
+\begin{enumerate}
+  \item \textbf{WYSWIETL} - Funkcja wyświetla wszystkie samochody znajdujące się w buforze. Gdy bufor jest pusty, informuje komunikatem "Lista jest pusta".
+  
+  \item \textbf{SORTUJ} - Sortowanie wg wszystkich parametrów samochodu (marka, model, cena, przebieg, typ paliwa, nowy/używany, bezwypadkowy/powypadkowy, rok produkcji). Aby zobaczyć efekt sortowania należy wyświetlić bufor.
+  \item \textbf{SZUKAJ} - Wyświetlanie samochodów spełniających parametry wyszukiwania. Gdy wybrane zostanie wyszukiwanie wg marki lub modelu, można użyć znaków specjalnych '*' (dowolny ciąg znaków) i '?' (dowolny, pojedyńczy znak).
+  \item \textbf{DODAJ NOWY SAMOCHOD} - Dodanie nowego samochodu do bazy na podstawie dialogu z uźytkownikiem.
+  \item \textbf{EDYTUJ DANE SAMOCHODU} - 
+  \item \textbf{USUN SAMOCHOD} - Usuwanie dowolnego samochodu znajdującego się w buforze.
+  \item \textbf{DODAJ LOSOWY SAMOHOD} - Program generuje dane nowego samochodu. Parametry marka i model są generowane wg założenia, że słowo składa się z na przemian ułożonych spółgłosek i samogłosek. Długość słowa jest losowana. Pozostałe parametry spełniają założenia programu, jednak nie zawsze są logiczne (np. auto z 1960r. może nie mieć nic na liczniku :) ).
+  \item \textbf{ZAPISZ BUFOR} - Zapisuje dane znajdujące się w buforze. Możliwy wybór, czy nazwa pliku ma być domyślna, ostatnio używana, czy nowa. Gdy plik o tej samej nazwie już istnieje, zostanie nadpisany.
+  \item \textbf{WCZYTAJ BUFOR} - Wczytuje bazę danych do bufora. Gdy plik nie istnieje, nic nie zostanie wczytane i lista nie będzie zajmować pamięci.
+  \item \textbf{USUN BUFOR BEZ ZAPISYWANIA} - Czyści pamięć RAM używaną przez program. Dane znajdujące się w pamięci są tracone.
+  \item \textbf{ZAKONCZ} - Kończy działanie programu. Gdy w pamięci znajdują się dane, program prosi użytkownika o informację, czy powinny zostać zapisane, czy usunięte.
+
+\end{enumerate} 
+
+
+
+\end{document}
