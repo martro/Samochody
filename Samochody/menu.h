@@ -25,6 +25,11 @@ samochod* funkcja_menu_12(samochod* lista,samochod*temp)
  lista=sortuj(lista,temp);
  return lista;
 }
+samochod* funkcja_menu_13(samochod* lista)
+{
+    szukaj(lista);
+    return lista;
+}
 
 samochod* funkcja_menu_21(samochod* temp, samochod* lista)
 {
@@ -122,17 +127,16 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
                "21 DODAJ NOWY SAMOCHOD\n"
                "22 EDYTUJ DANE SAMOCHODU\n"
                "23 USUN SAMOCHOD\n"
-               "24 LOSUJ SAMOCHOD (opcja testowa)\n\n"
+               "24 DODAJ LOSOWY SAMOCHOD (opcja testowa)\n\n"
                "31 ZAPISZ BUFOR\n"
                "32 WCZYTAJ BUFOR\n"
                "33 USUN BUFOR BEZ ZAPISYWANIA\n\n"
-               "41 STATYSTYKI\n\n"
                " 0 - ZAKONCZ\n\n"
 
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==12)||(wybor==21)||(wybor==23)||(wybor==24)||(wybor==31)||
+            if ((wybor==11)||(wybor==12)||(wybor==13)||(wybor==21)||(wybor==23)||(wybor==24)||(wybor==31)||
                 (wybor==32)||(wybor==33)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
@@ -167,6 +171,13 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
     {
 
         lista=funkcja_menu_12(lista,temp);
+        return lista;
+        break;
+    }
+    case 13:
+    {
+
+        lista=funkcja_menu_13(lista);
         return lista;
         break;
     }

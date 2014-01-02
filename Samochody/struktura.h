@@ -39,7 +39,6 @@ int rozmiar(samochod* first);
 char samogloska();
 samochod* sortuj(samochod* lista,samochod*temp);
 char spolgloska();
-void test(samochod *temp);
 samochod* tymczas();
 samochod* usun_1(samochod *lista,samochod* temp);
 samochod* wczytaj_bufor();
@@ -361,6 +360,7 @@ char spolgloska()
     return znak;
 }
 
+
 samochod* tymczas(samochod* temp)
 {
     temp=(samochod *)malloc(sizeof(samochod));
@@ -369,6 +369,332 @@ samochod* tymczas(samochod* temp)
     temp->nastepny=NULL;
     temp->poprzedni=NULL;
     return temp;
+}
+
+void szukaj(samochod *first)
+{
+    int i=0,ilosc,j,wybor,error,min,max,czywyswietlic,typ;
+    if (first==NULL)
+    {
+        printf("\nLista jest pusta.");
+    }
+
+    else
+    {
+        do
+        {
+            printf("Szukanie w polu wg:\n");
+            printf("\n 1 - Cena");
+            printf("\n 2 - Marka");
+            printf("\n 3 - Model");
+            printf("\n 4 - Przebieg");
+            printf("\n 5 - Paliwo"
+                   "\n 6 - Wypadek/bezwypadkowy"
+                   "\n 7 - Nowy/Uzywany"
+                   "\n 8 - Rok\n");
+            printf("Wybor: ");
+            error=0;
+            if (scanf("%d",&wybor)==0)
+            {
+                error=1;
+                printf("W.\n");
+                getchar();
+            }
+            else if ((wybor<1)||(wybor>8))
+            {
+                printf("Nieprawidlowy wybor.\n");
+                error=1;
+                getchar();
+            }
+        }
+        while(error==1);
+
+        if (wybor==1) //cena
+        {
+            printf("\nWyszukiwanie wg ceny.");
+            do
+            {
+                printf("Podaj minimalna cene: \n");
+                error=0;
+                if (scanf("%d",&min)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((min<0))
+                {
+                    printf("Nieprawidlowa cena.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+
+            do
+            {
+                printf("Podaj maksymalna cene: \n");
+                error=0;
+                if (scanf("%d",&max)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((max<min))
+                {
+                    printf("Maksymalna cena musi byc wieksza od minimalnej.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+        }
+
+        if (wybor==4) //przebieg
+        {
+            printf("\nWyszukiwanie wg przebiegu.");
+            do
+            {
+                printf("Podaj minimalny przebieg: \n");
+                error=0;
+                if (scanf("%d",&min)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((min<0))
+                {
+                    printf("Nieprawidlowy przebieg.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+
+            do
+            {
+                printf("Podaj maksymalny przebieg: \n");
+                error=0;
+                if (scanf("%d",&max)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((max<min))
+                {
+                    printf("Maksymalny przebieg musi byc wiekszy od minimalnego.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+        }
+
+        if (wybor==5) //paliwo
+        {
+            printf("\nWyszukiwanie wg paliwa.");
+            do
+            {
+                printf("Wybierz typ paliwa.\n"
+                       "1 - benzyna\n"
+                       "2 - ropa n.\n"
+                       "3 - gaz\n");
+                error=0;
+                if (scanf("%d",&typ)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((typ<=0)||(typ>3))
+                {
+                    printf("Nieprawidlowa cena.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+        }
+
+        if (wybor==6) //wypadek/bezwypadkowy
+        {
+            printf("\nBezwypadkowy/powypadkowy?.");
+            do
+            {
+                printf("Wybierz typ.\n"
+                       "1 - bezwypadkowy\n"
+                       "2 - powypadkowy\n");
+                error=0;
+                if (scanf("%d",&typ)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((typ<=0)||(typ>2))
+                {
+                    printf("Nieprawidlowy typ.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+        }
+
+        if (wybor==7) //wypadek/bezwypadkowy
+        {
+            printf("\nNowy/uzywany?.");
+            do
+            {
+                printf("Wybierz typ.\n"
+                       "1 - nowy\n"
+                       "2 - uzywany\n");
+                error=0;
+                if (scanf("%d",&typ)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((typ<=0)||(typ>2))
+                {
+                    printf("Nieprawidlowy typ.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+        }
+
+        if (wybor==8) //rok
+        {
+            printf("\nWyszukiwanie wg roku produkcji.");
+            do
+            {
+                printf("Podaj minimalny rok produkcji: \n");
+                error=0;
+                if (scanf("%d",&min)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((min<0))
+                {
+                    printf("Nieprawidlowy rok produkcji.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+
+            do
+            {
+                printf("Podaj maksymalny rok produkcji: \n");
+                error=0;
+                if (scanf("%d",&max)==0)
+                {
+                    error=1;
+                    printf("Blad. Wybierz ponownie.\n");
+                    getchar();
+                }
+                else if ((max<min))
+                {
+                    printf("Maksymalny rok produkcji musi byc wiekszy od minimalnego.\n");
+                    error=1;
+                    getchar();
+                }
+            }
+            while(error==1);
+        }
+
+        printf("\n                                      1-paliwo 2-wypadek/bezwypadkowy\n");
+        printf("BAZA DANYCH KOMISU SAMOCHODOWEGO      3-nowy/uzywany\n");
+        printf("Nr   Marka        Model        cena    przebieg  rok    spalanie    1  2  3\n");
+        printf("---------------------------------------------------------------------------");
+
+        do
+        {
+            i++;
+            ilosc=0;
+            czywyswietlic=0;
+
+            if (wybor==1) //cena
+                    if (((first->cena)>=min)&&((first->cena)<=max))
+                        czywyswietlic=1;
+
+            if (wybor==4) //przebieg
+                    if (((first->przebieg)>=min)&&((first->przebieg)<=max))
+                        czywyswietlic=1;
+
+            if (wybor==5) //paliwo
+                    if ((first->paliwo)==typ)
+                        czywyswietlic=1;
+
+            if (wybor==6) //wypadek
+                    if ((first->wypadek)==typ)
+                        czywyswietlic=1;
+
+            if (wybor==7) //nowy/uzywany
+                    if ((first->nowyuzywany)==typ)
+                        czywyswietlic=1;
+
+            if (wybor==8) //rok
+                    if (((first->rok)>=min)&&((first->rok)<=max))
+                        czywyswietlic=1;
+
+            if (czywyswietlic)
+            {
+            printf("\n%3d  ",i);
+            ilosc=printf("%s",first->marka);
+
+            for(j=0; j<(13-ilosc); j++)
+                printf(" ");
+            ilosc=printf("%s",first->model);
+            for(j=0; j<(13-ilosc); j++)
+                printf(" ");
+            ilosc=printf("%d",first->cena);
+            for(j=0; j<(8-ilosc); j++)
+                printf(" ");
+            ilosc=printf("%d",first->przebieg);
+            for(j=0; j<(8-ilosc); j++)
+                printf(" ");
+            printf("  %d   ",first->rok);
+            if (first->spalanie/10<1)
+                printf(" %.1f",first->spalanie);
+            else
+                printf("%.1f",first->spalanie);
+            for(j=0; j<(3-ilosc); j++)
+                printf(" ");
+
+            printf("        ");
+            if (first->paliwo==1)
+                printf("B  ");
+            else if (first->paliwo==2)
+                printf("D  ");
+            else if (first->paliwo==3)
+                printf("G  ");
+
+            if (first->wypadek==1)
+                printf("B  ");
+            else if (first->wypadek==2)
+                printf("W  ");
+
+            if (first->nowyuzywany==1)
+                printf("N");
+            else if (first->nowyuzywany==2)
+                printf("U");
+
+        }
+
+            first=first->nastepny;
+        }
+        while(first!=NULL);
+        printf("\n---------------------------------------------------------------------------");
+    }
 }
 
 samochod* sortuj(samochod* lista,samochod*temp)
@@ -694,8 +1020,9 @@ void wyswietl(samochod *first)
     {
         printf("\n                                      1-paliwo 2-wypadek/bezwypadkowy\n");
         printf("BAZA DANYCH KOMISU SAMOCHODOWEGO      3-nowy/uzywany\n");
-        printf("Nr   Marka          Model          cena      przebieg  spalanie    1  2  3\n");
+        printf("Nr   Marka        Model        cena    przebieg  rok    spalanie    1  2  3\n");
         printf("---------------------------------------------------------------------------");
+
         do
         {
             i++;
@@ -703,25 +1030,26 @@ void wyswietl(samochod *first)
             printf("\n%3d  ",i);
             ilosc=printf("%s",first->marka);
 
-            for(j=0; j<(15-ilosc); j++)
+            for(j=0; j<(13-ilosc); j++)
                 printf(" ");
             ilosc=printf("%s",first->model);
-            for(j=0; j<(15-ilosc); j++)
+            for(j=0; j<(13-ilosc); j++)
                 printf(" ");
             ilosc=printf("%d",first->cena);
-            for(j=0; j<(10-ilosc); j++)
+            for(j=0; j<(8-ilosc); j++)
                 printf(" ");
             ilosc=printf("%d",first->przebieg);
-            for(j=0; j<(10-ilosc); j++)
+            for(j=0; j<(8-ilosc); j++)
                 printf(" ");
+            printf("  %d   ",first->rok);
             if (first->spalanie/10<1)
-            printf(" %.2f",first->spalanie);
+                printf(" %.1f",first->spalanie);
             else
-            printf("%.2f",first->spalanie);
+                printf("%.1f",first->spalanie);
             for(j=0; j<(3-ilosc); j++)
                 printf(" ");
 
-            printf("       ");
+            printf("        ");
             if (first->paliwo==1)
                 printf("B  ");
             else if (first->paliwo==2)
@@ -739,15 +1067,10 @@ void wyswietl(samochod *first)
             else if (first->nowyuzywany==2)
                 printf("U");
 
-
-
-            for(j=0; j<(10-ilosc); j++)
-                printf(" ");
-
             first=first->nastepny;
         }
         while(first!=NULL);
-        printf("\n---------------------------------------------------------\n");
+        printf("\n---------------------------------------------------------------------------");
     }
 }
 
@@ -844,5 +1167,4 @@ void zapisz_bufor(samochod* first,d_prog* dane)
     else
         printf("Nie ma danych w buforze.");
 }
-
 #endif // STRUKTURA_H_INCLUDED
