@@ -29,8 +29,10 @@ typedef struct d_prog
 
 
 samochod* clear(samochod *first);
+int czy_dlugosci(char* zdanie1,char* zdanie2);
 samochod* dodajlos(samochod *first);
 samochod* edytuj(samochod *first);
+int  gdzie_gwiazdka(char* zdanie1);
 d_prog* init(d_prog* dane);
 void podkreslenie(void);
 samochod* pozycja(int poz,samochod* first);
@@ -60,6 +62,26 @@ samochod* clear(samochod *first)
     free(first->model);
     free(first);
     return NULL;
+}
+
+int czy_dlugosci(char *zdanie1,char* zdanie2)
+{
+    int rowne=0;
+
+    if (strlen(zdanie1)==strlen(zdanie2))
+        rowne=1;
+    return rowne;
+}
+
+int czy_rowne(char *zdanie1,char *zdanie2,int od_ktorego)
+{
+    int i,flaga=1;
+
+    for (i=0; i<strlen(zdanie1); i++)
+        if((zdanie1[i]!=zdanie2[i+od_ktorego]) && (zdanie1[i]!='?'))
+            flaga=0;
+
+    return flaga;
 }
 
 samochod* dodajlos(samochod *temp)
@@ -284,6 +306,27 @@ samochod* edytuj(samochod *temp)
     return temp;
 }
 
+int gdzie_gwiazdka(char *zdanie1)
+{
+    //0-nie ma
+    //1-z przodu
+    //2-z tylu
+    //3-z przodu i z tylu
+    int gdzie=0;
+
+    if( ((zdanie1[0]==42) && (zdanie1[strlen(zdanie1)-1]==42))==1)
+        gdzie=3;
+
+    else if( (zdanie1[0]!=42) && (zdanie1[strlen(zdanie1)-1]!=42))
+        gdzie=0;
+    else if(zdanie1[0]==42)
+        gdzie=1;
+    else if(zdanie1[strlen(zdanie1)-1]==42)
+        gdzie=2;
+
+    return gdzie;
+}
+
 d_prog* init(d_prog* dane)
 {
     dane=(d_prog *)malloc(sizeof(d_prog));
@@ -373,12 +416,14 @@ samochod* tymczas(samochod* temp)
 
 void szukaj(samochod *first)
 {
-    int i=0,ilosc,j,wybor,error,min,max,czywyswietlic,typ;
-    if (first==NULL)
-    {
-        printf("\nLista jest pusta.");
-    }
+    int i=0,ilosc,j,wybor,error,min,max,czywyswietlic,typ,gwiazdka;
+    char* zdanie1;
+    char* zdanie1_k;
+    char* wskaz;
 
+
+    if (first==NULL)
+        printf("\nLista jest pusta.");
     else
     {
         do
@@ -408,6 +453,18 @@ void szukaj(samochod *first)
             }
         }
         while(error==1);
+
+        if ((wybor==2))
+        {
+            zdanie1=(char*)malloc(sizeof(char)*MARKA);
+            zdanie1_k=(char*)malloc(sizeof(char)*MARKA);
+        }
+        if ((wybor==3))
+        {
+            zdanie1=(char*)malloc(sizeof(char)*MODEL);
+            zdanie1_k=(char*)malloc(sizeof(char)*MARKA);
+        }
+
 
         if (wybor==1) //cena
         {
@@ -449,6 +506,12 @@ void szukaj(samochod *first)
                 }
             }
             while(error==1);
+        }
+
+        if (wybor==2)
+        {
+            printf("Wyszukaj fraze: ");
+            scanf("%s",zdanie1);
         }
 
         if (wybor==4) //przebieg
@@ -623,76 +686,113 @@ void szukaj(samochod *first)
             czywyswietlic=0;
 
             if (wybor==1) //cena
-                    if (((first->cena)>=min)&&((first->cena)<=max))
+                if (((first->cena)>=min)&&((first->cena)<=max))
+                    czywyswietlic=1;
+
+            if (wybor==2) //model
+            {
+                gwiazdka=gdzie_gwiazdka(zdanie1);
+
+                if (gwiazdka==0)
+                {
+                    if (czy_dlugosci(zdanie1,first->marka)==1)
+                        czywyswietlic=czy_rowne(zdanie1,first->marka,0);
+                }
+
+                if (gwiazdka==1)
+                {
+                    wskaz=&zdanie1[1];
+                    strncpy(zdanie1_k,wskaz,strlen(zdanie1));
+                    czywyswietlic=czy_rowne(zdanie1_k,first->marka,strlen(first->marka)-strlen(zdanie1)+1);
+                }
+                if (gwiazdka==2)
+                {
+                    strncpy(zdanie1_k,zdanie1,strlen(zdanie1)-1);
+                    zdanie1_k[strlen(zdanie1)-1]='\0';
+                    czywyswietlic=czy_rowne(zdanie1_k,first->marka,0);
+                }
+                if (gwiazdka==3)
+                {
+                    wskaz=&zdanie1[1];
+                    strncpy(zdanie1_k,wskaz,strlen(zdanie1));
+                    zdanie1_k[strlen(zdanie1_k)-1]='\0';
+
+                    if (strstr(first->marka,zdanie1_k)!=NULL)
                         czywyswietlic=1;
+                }
+            }
 
             if (wybor==4) //przebieg
-                    if (((first->przebieg)>=min)&&((first->przebieg)<=max))
-                        czywyswietlic=1;
+                if (((first->przebieg)>=min)&&((first->przebieg)<=max))
+                    czywyswietlic=1;
 
             if (wybor==5) //paliwo
-                    if ((first->paliwo)==typ)
-                        czywyswietlic=1;
+                if ((first->paliwo)==typ)
+                    czywyswietlic=1;
 
             if (wybor==6) //wypadek
-                    if ((first->wypadek)==typ)
-                        czywyswietlic=1;
+                if ((first->wypadek)==typ)
+                    czywyswietlic=1;
 
             if (wybor==7) //nowy/uzywany
-                    if ((first->nowyuzywany)==typ)
-                        czywyswietlic=1;
+                if ((first->nowyuzywany)==typ)
+                    czywyswietlic=1;
 
             if (wybor==8) //rok
-                    if (((first->rok)>=min)&&((first->rok)<=max))
-                        czywyswietlic=1;
+                if (((first->rok)>=min)&&((first->rok)<=max))
+                    czywyswietlic=1;
 
             if (czywyswietlic)
             {
-            printf("\n%3d  ",i);
-            ilosc=printf("%s",first->marka);
+                printf("\n%3d  ",i);
+                ilosc=printf("%s",first->marka);
 
-            for(j=0; j<(13-ilosc); j++)
-                printf(" ");
-            ilosc=printf("%s",first->model);
-            for(j=0; j<(13-ilosc); j++)
-                printf(" ");
-            ilosc=printf("%d",first->cena);
-            for(j=0; j<(8-ilosc); j++)
-                printf(" ");
-            ilosc=printf("%d",first->przebieg);
-            for(j=0; j<(8-ilosc); j++)
-                printf(" ");
-            printf("  %d   ",first->rok);
-            if (first->spalanie/10<1)
-                printf(" %.1f",first->spalanie);
-            else
-                printf("%.1f",first->spalanie);
-            for(j=0; j<(3-ilosc); j++)
-                printf(" ");
+                for(j=0; j<(13-ilosc); j++)
+                    printf(" ");
+                ilosc=printf("%s",first->model);
+                for(j=0; j<(13-ilosc); j++)
+                    printf(" ");
+                ilosc=printf("%d",first->cena);
+                for(j=0; j<(8-ilosc); j++)
+                    printf(" ");
+                ilosc=printf("%d",first->przebieg);
+                for(j=0; j<(8-ilosc); j++)
+                    printf(" ");
+                printf("  %d   ",first->rok);
+                if (first->spalanie/10<1)
+                    printf(" %.1f",first->spalanie);
+                else
+                    printf("%.1f",first->spalanie);
+                for(j=0; j<(3-ilosc); j++)
+                    printf(" ");
 
-            printf("        ");
-            if (first->paliwo==1)
-                printf("B  ");
-            else if (first->paliwo==2)
-                printf("D  ");
-            else if (first->paliwo==3)
-                printf("G  ");
+                printf("        ");
+                if (first->paliwo==1)
+                    printf("B  ");
+                else if (first->paliwo==2)
+                    printf("D  ");
+                else if (first->paliwo==3)
+                    printf("G  ");
 
-            if (first->wypadek==1)
-                printf("B  ");
-            else if (first->wypadek==2)
-                printf("W  ");
+                if (first->wypadek==1)
+                    printf("B  ");
+                else if (first->wypadek==2)
+                    printf("W  ");
 
-            if (first->nowyuzywany==1)
-                printf("N");
-            else if (first->nowyuzywany==2)
-                printf("U");
+                if (first->nowyuzywany==1)
+                    printf("N");
+                else if (first->nowyuzywany==2)
+                    printf("U");
 
-        }
+            }
 
             first=first->nastepny;
         }
         while(first!=NULL);
+
+        if ((wybor==2)||(wybor==3))
+            free(zdanie1);
+        free(zdanie1_k);
         printf("\n---------------------------------------------------------------------------");
     }
 }
@@ -1168,3 +1268,4 @@ void zapisz_bufor(samochod* first,d_prog* dane)
         printf("Nie ma danych w buforze.");
 }
 #endif // STRUKTURA_H_INCLUDED
+
