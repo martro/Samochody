@@ -1,8 +1,0 @@
-{Subaru}
-[BRZ]
-[Forester]
-[Impreza]
-[Justy]
-[Legacy]
-[Outback]
-[Tribeca]

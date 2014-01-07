@@ -443,7 +443,6 @@ void szukaj(samochod *first)
             if (scanf("%d",&wybor)==0)
             {
                 error=1;
-                printf("W.\n");
                 getchar();
             }
             else if ((wybor<1)||(wybor>8))
@@ -706,6 +705,7 @@ void szukaj(samochod *first)
                     wskaz=&zdanie1[1];
                     strncpy(zdanie1_k,wskaz,strlen(zdanie1));
                     czywyswietlic=czy_rowne(zdanie1_k,first->marka,strlen(first->marka)-strlen(zdanie1)+1);
+
                 }
                 if (gwiazdka==2)
                 {
@@ -826,8 +826,10 @@ void szukaj(samochod *first)
         while(first!=NULL);
 
         if ((wybor==2)||(wybor==3))
+            {
             free(zdanie1);
-        free(zdanie1_k);
+            free(zdanie1_k);
+            }
         printf("\n---------------------------------------------------------------------------");
     }
 }
