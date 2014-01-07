@@ -22,8 +22,8 @@ samochod* funkcja_menu_11(samochod* lista)
 
 samochod* funkcja_menu_12(samochod* lista,samochod*temp)
 {
- lista=sortuj(lista,temp);
- return lista;
+    lista=sortuj(lista,temp);
+    return lista;
 }
 samochod* funkcja_menu_13(samochod* lista)
 {
@@ -41,19 +41,16 @@ samochod* funkcja_menu_21(samochod* temp, samochod* lista)
     return lista;
 }
 
-samochod* funkcja_menu_23(samochod* lista,samochod* temp)
+samochod* funkcja_menu_22(samochod* temp, samochod* lista)
 {
-    int wybor,error=1,usunieto;
-    printf("\nUSUWANIE SAMOCHODU Z BAZY\n\n");
+    int wybor,error=1;
+
     wyswietl(lista);
-
-
-    while((lista)&&(usunieto==0))
+    if (lista)
     {
-        usunieto=0;
     do
     {
-    printf("\nKtory samochod usunac?\nWybor:");
+        printf("\nKtory samochod edytowac?\nWybor:");
         error=0;
         scanf("%d",&wybor);
         error=printf("\nwybor: %d\n",wybor);
@@ -66,13 +63,43 @@ samochod* funkcja_menu_23(samochod* lista,samochod* temp)
     while (error==0);
 
     temp=pozycja(wybor,lista);
-    printf("%s %s",temp->marka,temp->model);
-    if (temp)
+    temp=edytuj(temp);
 
-{
-lista=usun_1(lista,temp);
-usunieto=1;
+    }
+    return lista;
 }
+samochod* funkcja_menu_23(samochod* lista,samochod* temp)
+{
+    int wybor,error=1,usunieto;
+    printf("\nUSUWANIE SAMOCHODU Z BAZY\n\n");
+    wyswietl(lista);
+
+
+    while((lista)&&(usunieto==0))
+    {
+        usunieto=0;
+        do
+        {
+            printf("\nKtory samochod usunac?\nWybor:");
+            error=0;
+            scanf("%d",&wybor);
+            error=printf("\nwybor: %d\n",wybor);
+            if ((wybor<=0)||(wybor>rozmiar(lista)))
+                error=0;
+
+            if (error==0)
+                printf("Niepoprawny wybor. Wybierz jeszcze raz.\n");
+        }
+        while (error==0);
+
+        temp=pozycja(wybor,lista);
+        printf("%s %s",temp->marka,temp->model);
+        if (temp)
+
+        {
+            lista=usun_1(lista,temp);
+            usunieto=1;
+        }
     }
     return lista;
 }
@@ -136,8 +163,8 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
                "WYBOR: ");
         if(scanf("%d",&wybor))   //jezeli odczytane jest liczba
         {
-            if ((wybor==11)||(wybor==12)||(wybor==13)||(wybor==21)||(wybor==23)||(wybor==24)||(wybor==31)||
-                (wybor==32)||(wybor==33)||(wybor==0))
+            if ((wybor==11)||(wybor==12)||(wybor==13)||(wybor==21)||(wybor==22)||(wybor==23)||(wybor==24)||(wybor==31)||
+                    (wybor==32)||(wybor==33)||(wybor==0))
             {
                 printf("Poprawnie odczytano. Twoj wybor to: %d\n",wybor);
                 blad_odczytu=0;
@@ -184,6 +211,12 @@ samochod* menu_glowne(samochod* lista,samochod* temp,d_prog* dane,int* dzialaj)
     case 21:
     {
         lista=funkcja_menu_21(temp,lista);
+        return lista;
+        break;
+    }
+    case 22:
+    {
+        lista=funkcja_menu_22(temp,lista);
         return lista;
         break;
     }
