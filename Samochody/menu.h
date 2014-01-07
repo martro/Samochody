@@ -35,7 +35,6 @@ samochod* funkcja_menu_21(samochod* temp, samochod* lista)
 {
     temp=tymczas(temp);
     temp=edytuj(temp);
-    printf("\ntest: %s\n",temp->marka);
     lista=push(lista,temp);
 
     return lista;

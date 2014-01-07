@@ -1228,11 +1228,6 @@ samochod* zamien2(samochod* bierz,samochod *temp,int n)
         bierz->nastepny=temp;
     }
 
-
-    /* free(temp->marka);
-     free(temp->model);
-     free(temp);*/
-
     while (bierz->poprzedni)
         bierz=bierz->poprzedni;
     return bierz;
